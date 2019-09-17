@@ -18,10 +18,11 @@ public class UserService {
 		User user = userRepository.findOneByEmail(userObj.getEmail());
 		if (user == null) {
 			/* set role */
-			userObj.setRole(UserConstants.UNKNOWN_USER);
+			userObj.setRole(UserConstants.NORMAL_USER);
 
 			/* set access permissions */
 			Access access = new Access();
+			access.setFood(true);
 			userObj.setAccess(access);
 
 			userRepository.save(userObj);
