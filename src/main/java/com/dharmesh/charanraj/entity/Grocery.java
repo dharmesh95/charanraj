@@ -6,8 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "feedback")
-public class Feedback {
+@Document(collection = "grocery")
+public class Grocery {
 
 	@Id
 	private String id;
@@ -18,8 +18,8 @@ public class Feedback {
 	@Field("date")
 	private Date date;
 
-	@Field("feedback")
-	private String feedback;
+	@Field("item-name")
+	private String itemName;
 
 	public String getId() {
 		return id;
@@ -45,12 +45,12 @@ public class Feedback {
 		this.date = date;
 	}
 
-	public String getFeedback() {
-		return feedback;
+	public String getItemName() {
+		return itemName;
 	}
 
-	public void setFeedback(String feedback) {
-		this.feedback = feedback;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 
 }

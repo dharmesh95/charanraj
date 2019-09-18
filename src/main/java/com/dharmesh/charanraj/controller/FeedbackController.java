@@ -1,5 +1,7 @@
 package com.dharmesh.charanraj.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,11 @@ public class FeedbackController {
 	@RequestMapping("/addFeedback")
 	public void addFeedback(@RequestBody Feedback feedbackObj) {
 		feedbackService.addFeedback(feedbackObj);
+	}
+
+	@RequestMapping("/getFeedback")
+	public List<Feedback> getFeedback() {
+		return feedbackService.getFeedback();
 	}
 
 }
