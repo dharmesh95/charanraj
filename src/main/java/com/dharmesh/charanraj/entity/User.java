@@ -10,6 +10,9 @@ public class User {
 	@Id
 	private String id;
 
+	@Field("name")
+	private String name;
+
 	@Field("email")
 	private String email;
 
@@ -28,6 +31,14 @@ public class User {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {

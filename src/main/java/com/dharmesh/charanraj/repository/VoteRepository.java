@@ -13,4 +13,6 @@ public interface VoteRepository extends MongoRepository<Vote, String> {
 
 	List<Vote> findByDateGreaterThan(Date date);
 
+	void deleteByEmail(String email);
+
 }
