@@ -23,7 +23,7 @@ public class UserService {
 			/* set access permissions */
 			Access access = new Access();
 			access.setFood(true);
-			access.setCleaning(true);
+			access.setGrocery(true);
 			userObj.setAccess(access);
 
 			userRepository.save(userObj);
