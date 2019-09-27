@@ -9,10 +9,10 @@ import com.dharmesh.charanraj.entity.Vote;
 
 public interface VoteRepository extends MongoRepository<Vote, String> {
 
-	List<Vote> findByEmailAndDateGreaterThan(String email, Date weekStartDate);
-
-	List<Vote> findByDateGreaterThan(Date date);
-
 	void deleteByEmail(String email);
+
+	List<Vote> findByDateBetween(Date weekStartDate, Date weekEndDate);
+
+	List<Vote> findByEmailAndDateBetween(String email, Date weekStartDate, Date weekEndDate);
 
 }

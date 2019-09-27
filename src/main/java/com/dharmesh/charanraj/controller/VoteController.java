@@ -1,6 +1,5 @@
 package com.dharmesh.charanraj.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dharmesh.charanraj.entity.Vote;
+import com.dharmesh.charanraj.model.VoteModel;
+import com.dharmesh.charanraj.model.Week;
 import com.dharmesh.charanraj.service.VoteService;
 
 @CrossOrigin
@@ -21,13 +22,14 @@ public class VoteController {
 	private VoteService voteService;
 
 	@RequestMapping("/getAllVotesByEmail")
-	public HashMap<String, Vote> getAllVotesByEmail(@RequestBody Vote voteObj) {
-		return voteService.getAllVotesByEmail(voteObj.getEmail(), voteObj.getDate());
+	public HashMap<String, Vote> getAllVotesByEmail(@RequestBody VoteModel voteObj) {
+		return voteService.getAllVotesByEmail(voteObj.getEmail(), voteObj.getWeek().getWeekStartDate(),
+				voteObj.getWeek().getWeekEndDate());
 	}
 
 	@RequestMapping("/getAllVotes")
-	public HashMap<String, Double> getAllVotes(@RequestBody Date weekStartDate) {
-		return voteService.getAllVotes(weekStartDate);
+	public HashMap<String, Double> getAllVotes(@RequestBody Week week) {
+		return voteService.getAllVotes(week.getWeekStartDate(), week.getWeekEndDate());
 	}
 
 	@RequestMapping("/addVote")

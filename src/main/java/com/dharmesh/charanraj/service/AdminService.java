@@ -1,6 +1,5 @@
 package com.dharmesh.charanraj.service;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +34,6 @@ public class AdminService {
 		} else {
 			userRepository.save(userObj);
 		}
-	}
-
-	public List<User> getApprovedUsers() {
-		List<String> roles = Arrays.asList(UserConstants.REJECTED_USER, UserConstants.UNKNOWN_USER);
-		return userRepository.findByRoleNotIn(roles);
 	}
 
 	public void deleteUser(User userObj) {

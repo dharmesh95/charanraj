@@ -1,5 +1,7 @@
 package com.dharmesh.charanraj.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,11 @@ public class UserController {
 	@RequestMapping("/getUser")
 	public User getUser(@RequestBody User userObj) {
 		return userService.getUser(userObj);
+	}
+
+	@RequestMapping("/getApprovedUsers")
+	public List<User> getApprovedUsers() {
+		return userService.getApprovedUsers();
 	}
 
 }

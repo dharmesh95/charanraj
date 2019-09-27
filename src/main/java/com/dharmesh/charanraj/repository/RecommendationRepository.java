@@ -9,6 +9,6 @@ import com.dharmesh.charanraj.entity.Recommendation;
 
 public interface RecommendationRepository extends MongoRepository<Recommendation, String> {
 
-	List<Recommendation> findByDateGreaterThan(Date weekStartDate);
+	List<Recommendation> findByDateBetween(Date weekStartDate, Date weekEndDate);
 
 }

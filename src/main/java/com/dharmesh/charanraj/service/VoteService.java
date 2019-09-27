@@ -21,18 +21,8 @@ public class VoteService {
 		voteRepository.save(voteObj);
 	}
 
-	public HashMap<String, Vote> getAllVotesByEmail(String email, Date weekStartDate) {
-		List<Vote> votes = voteRepository.findByEmailAndDateGreaterThan(email, weekStartDate);
-		/* hash map has recommendation id as key and object as value */
-		HashMap<String, Vote> votesHashMap = new HashMap<String, Vote>();
-		votes.forEach(vote -> {
-			votesHashMap.put(vote.getRecommendationId(), vote);
-		});
-		return votesHashMap;
-	}
-
-	public HashMap<String, Double> getAllVotes(Date weekStartDate) {
-		List<Vote> votes = voteRepository.findByDateGreaterThan(weekStartDate);
+	public HashMap<String, Double> getAllVotes(Date weekStartDate, Date weekEndDate) {
+		List<Vote> votes = voteRepository.findByDateBetween(weekStartDate, weekEndDate);
 		/* hash map has recommendation id & email as key and object as value */
 		HashMap<String, Vote> votesHashMap = new HashMap<String, Vote>();
 		/* hash map has recommendation id as key and points as value */
@@ -45,5 +35,15 @@ public class VoteService {
 			votesCountHashMap.put(vote.getRecommendationId(), (prevPoints != null ? prevPoints : 0) + vote.getPoints());
 		});
 		return votesCountHashMap;
+	}
+
+	public HashMap<String, Vote> getAllVotesByEmail(String email, Date weekStartDate, Date weekEndDate) {
+		List<Vote> votes = voteRepository.findByEmailAndDateBetween(email, weekStartDate, weekEndDate);
+		/* hash map has recommendation id as key and object as value */
+		HashMap<String, Vote> votesHashMap = new HashMap<String, Vote>();
+		votes.forEach(vote -> {
+			votesHashMap.put(vote.getRecommendationId(), vote);
+		});
+		return votesHashMap;
 	}
 }

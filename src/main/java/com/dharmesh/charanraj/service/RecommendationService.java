@@ -22,8 +22,8 @@ public class RecommendationService {
 		recommendationRepository.save(recommendationObj);
 	}
 
-	public HashMap<String, Recommendation> getAllRecommendations(Date weekStartDate) {
-		List<Recommendation> recommendations = recommendationRepository.findByDateGreaterThan(weekStartDate);
+	public HashMap<String, Recommendation> getAllRecommendations(Date weekStartDate, Date weekEndDate) {
+		List<Recommendation> recommendations = recommendationRepository.findByDateBetween(weekStartDate, weekEndDate);
 		/* hash map has recommendation id as key and object as value */
 		HashMap<String, Recommendation> recommendationsHashMap = new HashMap<String, Recommendation>();
 		recommendations.forEach(recommendation -> {

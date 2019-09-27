@@ -29,11 +29,6 @@ public class AdminController {
 		adminService.updateUserRole(userObj);
 	}
 
-	@RequestMapping("/getApprovedUsers")
-	public List<User> getApprovedUsers() {
-		return adminService.getApprovedUsers();
-	}
-
 	@RequestMapping("/deleteUser")
 	public void deleteUser(@RequestBody User userObj) {
 		adminService.deleteUser(userObj);

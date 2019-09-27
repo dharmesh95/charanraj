@@ -1,5 +1,8 @@
 package com.dharmesh.charanraj.service;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,11 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	public List<User> getApprovedUsers() {
+		List<String> roles = Arrays.asList(UserConstants.REJECTED_USER, UserConstants.UNKNOWN_USER);
+		return userRepository.findByRoleNotIn(roles);
+	}
 
 	public User getUser(User userObj) {
 		User user = userRepository.findOneByEmail(userObj.getEmail());
