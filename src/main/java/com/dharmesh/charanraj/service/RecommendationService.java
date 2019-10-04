@@ -31,4 +31,8 @@ public class RecommendationService {
 		});
 		return recommendationsHashMap;
 	}
+
+	public void deleteRecommendation(Recommendation recommendationObj) {
+		recommendationRepository.deleteById(recommendationObj.getId());
+	}
 }

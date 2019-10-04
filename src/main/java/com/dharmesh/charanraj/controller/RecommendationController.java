@@ -25,6 +25,11 @@ public class RecommendationController {
 		recommendationService.addRecommendation(recommendationObj);
 	}
 
+	@RequestMapping("/deleteRecommendation")
+	public void deleteRecommendation(@RequestBody Recommendation recommendationObj) {
+		recommendationService.deleteRecommendation(recommendationObj);
+	}
+
 	@RequestMapping("/getAllRecommendations")
 	public HashMap<String, Recommendation> getAllRecommendations(@RequestBody Week week) {
 		return recommendationService.getAllRecommendations(week.getWeekStartDate(), week.getWeekEndDate());
