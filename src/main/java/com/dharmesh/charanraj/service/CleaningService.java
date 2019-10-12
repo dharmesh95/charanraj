@@ -27,5 +27,9 @@ public class CleaningService {
 	public List<Cleaning> getCleaningSchedule(User user) {
 		return cleaningRepository.findByUser1IdOrUser2Id(user.getId(), user.getId());
 	}
+	
+	public List<Cleaning> getFullCleaningSchedule() {
+		return cleaningRepository.findAll();
+	}
 
 }

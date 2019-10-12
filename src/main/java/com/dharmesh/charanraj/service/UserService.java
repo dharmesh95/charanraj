@@ -32,7 +32,8 @@ public class UserService {
 			Access access = new Access();
 			access.setFood(true);
 			access.setGrocery(true);
-			userObj.setAccess(access);
+			access.setCleaning(true);
+			access.setSchedule(true);
 
 			userRepository.save(userObj);
 			return userObj;
