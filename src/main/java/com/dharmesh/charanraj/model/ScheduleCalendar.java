@@ -7,7 +7,7 @@ public class ScheduleCalendar {
 	private int noOfCurrentMonthDays;
 	private int noOfNextMonthDays;
 
-	private List<List<Integer>> weeks;
+	private List<List<ScheduleCell>> weeks;
 
 	public int getNoOfLastMonthDays() {
 		return noOfLastMonthDays;
@@ -33,11 +33,11 @@ public class ScheduleCalendar {
 		this.noOfNextMonthDays = noOfNextMonthDays;
 	}
 
-	public List<List<Integer>> getWeeks() {
+	public List<List<ScheduleCell>> getWeeks() {
 		return weeks;
 	}
 
-	public void setWeeks(List<List<Integer>> weeks) {
+	public void setWeeks(List<List<ScheduleCell>> weeks) {
 		this.weeks = weeks;
 	}
 

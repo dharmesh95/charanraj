@@ -24,8 +24,10 @@ import org.springframework.stereotype.Service;
 
 import com.dharmesh.charanraj.constants.ScheduleConstants;
 import com.dharmesh.charanraj.entity.Cleaning;
+import com.dharmesh.charanraj.entity.User;
 import com.dharmesh.charanraj.model.ExcelPointer;
 import com.dharmesh.charanraj.model.ScheduleCalendar;
+import com.dharmesh.charanraj.model.ScheduleCell;
 
 @Service
 public class ScheduleService {
@@ -40,19 +42,19 @@ public class ScheduleService {
 		/* set year, month name, weekdays name */
 		setHeaders(workbook);
 
-		/* fetch dates in the calendar */
-		ScheduleCalendar scheduleCalendar = getScheduleCalendar();
 		/* fetch cleaning schedule data */
 		List<Cleaning> fullCleaningSchedule = cleaningService.getFullCleaningSchedule();
+		/* fetch dates in the calendar */
+		ScheduleCalendar scheduleCalendar = getScheduleCalendar(fullCleaningSchedule);
 
 		/* set dates */
 		ExcelPointer pointer = new ExcelPointer(2, 0);
-		for (List<Integer> week : scheduleCalendar.getWeeks()) {
+		for (List<ScheduleCell> week : scheduleCalendar.getWeeks()) {
 			Row row = sheet.createRow(pointer.postIncrementRow());
 			pointer.setColIndex(0);
-			for (Integer date : week) {
+			for (ScheduleCell scheduleCell : week) {
 				Cell cell = row.createCell(pointer.postIncrementCol());
-				cell.setCellValue(date);
+				cell.setCellValue(scheduleCell.getDateDisplayValue());
 				cell.setCellStyle(getDateCellStyle(workbook));
 			}
 			row = sheet.createRow(pointer.postIncrementRow());
@@ -60,6 +62,8 @@ public class ScheduleService {
 			pointer.setColIndex(0);
 			for (int i = 0; i < 7; i++) {
 				Cell cell = row.createCell(pointer.postIncrementCol());
+				if (i < week.size())
+					cell.setCellValue(week.get(i).getUserName1() + "\n" + week.get(i).getUserName2());
 				/* Wednesday */
 				if (i == 2)
 					cell.setCellStyle(getDataCellStyle(workbook, true));
@@ -111,8 +115,8 @@ public class ScheduleService {
 		}
 	}
 
-	private ScheduleCalendar getScheduleCalendar() {
-		List<Integer> dates = new ArrayList<Integer>();
+	private ScheduleCalendar getScheduleCalendar(List<Cleaning> fullCleaningSchedule) {
+		List<ScheduleCell> cells = new ArrayList<ScheduleCell>();
 
 		Calendar cal = Calendar.getInstance();
 		int noOfDaysInCurrentMonth = Month.of(cal.get(Calendar.MONTH) + 1).maxLength();
@@ -133,17 +137,34 @@ public class ScheduleService {
 
 		/* last month */
 		for (int i = startPrevious; i <= endPrevious; i++) {
-			dates.add(i);
+			cells.add(new ScheduleCell(i));
 		}
 		/* current month */
 		for (int i = 1; i <= noOfDaysInCurrentMonth; i++) {
-			dates.add(i);
+			if (i <= fullCleaningSchedule.size()) {
+				Cleaning cleaningObj = fullCleaningSchedule.get(i - 1);
+				if (cleaningObj != null) {
+					User user1 = cleaningObj.getUser1();
+					User user2 = cleaningObj.getUser2();
+					if (user2 != null) {
+						cells.add(new ScheduleCell(i, user1.getName(), user2.getName()));
+					} else if (user1 != null) {
+						cells.add(new ScheduleCell(i, user1.getName()));
+					} else {
+						cells.add(new ScheduleCell(i));
+					}
+				} else {
+					cells.add(new ScheduleCell(i));
+				}
+			} else {
+				cells.add(new ScheduleCell(i));
+			}
 		}
 		/* next month */
 		for (int i = startNext; i <= endNext; i++) {
-			dates.add(i);
+			cells.add(new ScheduleCell(i));
 		}
-		List<List<Integer>> weeks = divideInWeeks(dates);
+		List<List<ScheduleCell>> weeks = divideInWeeks(cells);
 
 		ScheduleCalendar calendar = new ScheduleCalendar();
 		calendar.setNoOfLastMonthDays(endPrevious - startPrevious + 1);
@@ -153,17 +174,17 @@ public class ScheduleService {
 		return calendar;
 	}
 
-	private List<List<Integer>> divideInWeeks(List<Integer> dates) {
-		List<List<Integer>> weeks = new ArrayList<List<Integer>>();
-		List<Integer> week = null;
-		for (int i = 0; i < dates.size(); i++) {
+	private List<List<ScheduleCell>> divideInWeeks(List<ScheduleCell> cells) {
+		List<List<ScheduleCell>> allWeekCells = new ArrayList<List<ScheduleCell>>();
+		List<ScheduleCell> weekCells = null;
+		for (int i = 0; i < cells.size(); i++) {
 			if (i % 7 == 0) {
-				week = new ArrayList<Integer>();
-				weeks.add(week);
+				weekCells = new ArrayList<ScheduleCell>();
+				allWeekCells.add(weekCells);
 			}
-			week.add(dates.get(i));
+			weekCells.add(cells.get(i));
 		}
-		return weeks;
+		return allWeekCells;
 	}
 
 	private void setStyles(Workbook workbook) {
@@ -225,6 +246,8 @@ public class ScheduleService {
 			style.setFillForegroundColor(ScheduleConstants.GREY_COLOR);
 			style.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		}
+		style.setWrapText(true);
+		style.setVerticalAlignment(CellStyle.VERTICAL_TOP);
 		style.setBorderLeft(CellStyle.BORDER_THIN);
 		style.setBorderRight(CellStyle.BORDER_THIN);
 		style.setBorderBottom(CellStyle.BORDER_THIN);
