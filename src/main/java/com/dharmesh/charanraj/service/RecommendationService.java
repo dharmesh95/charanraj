@@ -29,7 +29,6 @@ public class RecommendationService {
 		HashMap<String, Recommendation> recommendationsHashMap = new HashMap<String, Recommendation>();
 		recommendations.forEach(recommendation -> {
 			recommendationsHashMap.put(recommendation.getId(), recommendation);
-			System.out.println("recommendation\n" + recommendation);
 		});
 		return recommendationsHashMap;
 	}
