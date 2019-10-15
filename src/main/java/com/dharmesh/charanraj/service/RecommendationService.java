@@ -23,12 +23,13 @@ public class RecommendationService {
 	}
 
 	public HashMap<String, Recommendation> getAllRecommendations(Date weekStartDate, Date weekEndDate) {
+		System.out.println("weekStartDate" + weekStartDate + "\nweekEndDate" + weekEndDate);
 		List<Recommendation> recommendations = recommendationRepository.findByDateBetween(weekStartDate, weekEndDate);
 		/* hash map has recommendation id as key and object as value */
 		HashMap<String, Recommendation> recommendationsHashMap = new HashMap<String, Recommendation>();
 		recommendations.forEach(recommendation -> {
 			recommendationsHashMap.put(recommendation.getId(), recommendation);
-			System.out.println(recommendation);
+			System.out.println("recommendation\n" + recommendation);
 		});
 		return recommendationsHashMap;
 	}
