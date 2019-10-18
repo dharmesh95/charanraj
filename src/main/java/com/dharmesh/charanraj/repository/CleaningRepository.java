@@ -8,6 +8,8 @@ import com.dharmesh.charanraj.entity.Cleaning;
 
 public interface CleaningRepository extends MongoRepository<Cleaning, String> {
 
-	List<Cleaning> findByUser1IdOrUser2Id(String userId, String userId2);
+	List<Cleaning> findByUser1IdOrUser2IdOrderByDate(String userId, String userId2);
+
+	List<Cleaning> findAllByOrderByDate();
 
 }
