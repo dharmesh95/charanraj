@@ -20,5 +20,3 @@ echo moved all files in web app build moved to static folder
 git add .
 git commit -m "auto commited"
 git push
-
-pause
