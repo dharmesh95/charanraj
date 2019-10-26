@@ -27,6 +27,10 @@ public class CleaningService {
 		return cleaningRepository.findByUser1IdOrUser2IdOrderByDate(user.getId(), user.getId());
 	}
 	
+	public List<Cleaning> getCleaningScheduleByEmail(String email) {
+		return cleaningRepository.findByUser1EmailOrUser2EmailOrderByDate(email, email);
+	}
+	
 	public List<Cleaning> getFullCleaningSchedule() {
 		return cleaningRepository.findAllByOrderByDate();
 	}

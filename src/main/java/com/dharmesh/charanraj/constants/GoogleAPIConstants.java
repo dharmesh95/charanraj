@@ -23,4 +23,16 @@ public class GoogleAPIConstants {
 			+ "Thanks,<br />Das na Das Jai Swaminarayan 🙏<br /><br />"
 			+ "This is an automatically generated notification from Charanraj App.<br />"
 			+ "Please do not reply to this email.</body></html>";
+
+	/* event */
+	public static final String LOCATION = "111 Mt Olive Dr, Etobicoke, ON M9V 2E3, Canada";
+	public static final String DESCRIPTION = "Hello,\n\nWe would like to notify you that its your Cleaning Turn today. "
+			+ "If you cannot do it due to some reason then please update in WhatsApp group.\n\n"
+			+ "Thanks,\nDas na Das Jai Swaminarayan 🙏";
+	public static final String SUMMARY = "Cleaning";
+	public static final String TZ_DB_NAME = "America/Toronto";
+	public static final String DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
+	public static final String CALENDAR_ID = "primary";
+	public static final String REMINDER_METHOD = "popup";
+
 }

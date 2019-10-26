@@ -12,4 +12,6 @@ public interface CleaningRepository extends MongoRepository<Cleaning, String> {
 
 	List<Cleaning> findAllByOrderByDate();
 
+	List<Cleaning> findByUser1EmailOrUser2EmailOrderByDate(String email, String email2);
+
 }

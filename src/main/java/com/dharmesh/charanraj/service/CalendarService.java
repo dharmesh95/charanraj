@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
 import com.dharmesh.charanraj.constants.GoogleAPIConstants;
+import com.dharmesh.charanraj.helper.DateHelper;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -23,7 +26,8 @@ import com.google.api.client.util.DateTime;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
-import com.google.api.services.calendar.model.Events;
+import com.google.api.services.calendar.model.EventAttendee;
+import com.google.api.services.calendar.model.EventDateTime;
 
 @Service
 public class CalendarService {
@@ -67,24 +71,38 @@ public class CalendarService {
 		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 		Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
 				.setApplicationName(GoogleAPIConstants.APPLICATION_NAME).build();
-
-		// List the next 10 events from the primary calendar.
-		DateTime now = new DateTime(System.currentTimeMillis());
-		Events events = service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
-				.setSingleEvents(true).execute();
-		List<Event> items = events.getItems();
-		if (items.isEmpty()) {
-			System.out.println("No upcoming events found.");
-		} else {
-			System.out.println("Upcoming events");
-			for (Event event : items) {
-				DateTime start = event.getStart().getDateTime();
-				if (start == null) {
-					start = event.getStart().getDate();
-				}
-				System.out.printf("%s (%s)\n", event.getSummary(), start);
-			}
-		}
 		return service;
+	}
+
+	public void sendEventInvites(String to, Date date) {
+		Date startDate = DateHelper.getTime(date, 20, 15, 0, 0);
+		Date endDate = DateHelper.getTime(date, 21, 15, 0, 0);
+
+		try {
+			Calendar cService = this.getService();
+			Event event = new Event().setSummary(GoogleAPIConstants.SUMMARY).setLocation(GoogleAPIConstants.LOCATION)
+					.setDescription(GoogleAPIConstants.DESCRIPTION);
+
+			DateTime startDateTime = new DateTime(
+					new SimpleDateFormat(GoogleAPIConstants.DATE_TIME_FORMAT).format(startDate));
+			EventDateTime start = new EventDateTime().setDateTime(startDateTime)
+					.setTimeZone(GoogleAPIConstants.TZ_DB_NAME);
+			event.setStart(start);
+
+			DateTime endDateTime = new DateTime(
+					new SimpleDateFormat(GoogleAPIConstants.DATE_TIME_FORMAT).format(endDate));
+			EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone(GoogleAPIConstants.TZ_DB_NAME);
+			event.setEnd(end);
+
+			EventAttendee[] attendees = new EventAttendee[] { new EventAttendee().setEmail(to) };
+			event.setAttendees(Arrays.asList(attendees));
+
+			event = cService.events().insert(GoogleAPIConstants.CALENDAR_ID, event).execute();
+			/* System.out.printf("Event created: %s\n", event.getHtmlLink()); */
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (GeneralSecurityException e) {
+			e.printStackTrace();
+		}
 	}
 }
