@@ -20,7 +20,6 @@ public class CleaningService {
 	}
 
 	public void saveCleaningSchedule(List<Cleaning> cleaningSchedule) {
-		deleteAll();
 		cleaningRepository.saveAll(cleaningSchedule);
 	}
 
@@ -30,6 +29,10 @@ public class CleaningService {
 	
 	public List<Cleaning> getFullCleaningSchedule() {
 		return cleaningRepository.findAllByOrderByDate();
+	}
+
+	public void updateCleaningSchedule(Cleaning cleaningObj) {
+		cleaningRepository.save(cleaningObj);
 	}
 
 }

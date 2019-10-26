@@ -24,6 +24,11 @@ public class CleaningController {
 	public void saveCleaningSchedule(@RequestBody List<Cleaning> cleaningSchedule) {
 		cleaningService.saveCleaningSchedule(cleaningSchedule);
 	}
+	
+	@RequestMapping("/updateCleaningSchedule")
+	public void updateCleaningSchedule(@RequestBody Cleaning cleaningObj) {
+		cleaningService.updateCleaningSchedule(cleaningObj);
+	}
 
 	@RequestMapping("/deleteSchedule")
 	public void deleteAll() {
@@ -33,6 +38,11 @@ public class CleaningController {
 	@RequestMapping("/getCleaningSchedule")
 	public List<Cleaning> getCleaningSchedule(@RequestBody User user) {
 		return cleaningService.getCleaningSchedule(user);
+	}
+	
+	@RequestMapping("/getFullCleaningSchedule")
+	public List<Cleaning> getFullCleaningSchedule() {
+		return cleaningService.getFullCleaningSchedule();
 	}
 
 }
