@@ -21,6 +21,7 @@ public class VoteService {
 		voteRepository.save(voteObj);
 	}
 
+	/* returns a map with recommendation id as key and total points as value */
 	public HashMap<String, Double> getAllVotes(Date weekStartDate, Date weekEndDate) {
 		List<Vote> votes = voteRepository.findByDateBetween(weekStartDate, weekEndDate);
 		/* hash map has recommendation id & email as key and object as value */
@@ -37,6 +38,10 @@ public class VoteService {
 		return votesCountHashMap;
 	}
 
+	/*
+	 * returns a map with all votes for an email id - recommendation id as key and
+	 * vote object
+	 */
 	public HashMap<String, Vote> getAllVotesByEmail(String email, Date weekStartDate, Date weekEndDate) {
 		List<Vote> votes = voteRepository.findByEmailAndDateBetween(email, weekStartDate, weekEndDate);
 		/* hash map has recommendation id as key and object as value */
