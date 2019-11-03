@@ -128,7 +128,7 @@ public class ScheduleService {
 		cal.set(Calendar.DATE, noOfDaysInCurrentMonth);
 		int noOfDaysLeftInWeek = cal.get(Calendar.DAY_OF_WEEK) == 1 ? 0 : 8 - cal.get(Calendar.DAY_OF_WEEK);
 
-		int noOfNextMonthDays = noOfDaysLeftInWeek >= 5 ? 7 - noOfDaysLeftInWeek : cal.get(Calendar.DAY_OF_WEEK) - 2;
+		int noOfNextMonthDays = noOfDaysLeftInWeek >= 5 ? 7 - noOfDaysLeftInWeek : noOfDaysLeftInWeek + 2;
 
 		int startPrevious = noOfDaysInPreviousMonth - noOfPreviousMonthDays + 1;
 		int endPrevious = noOfDaysInPreviousMonth;

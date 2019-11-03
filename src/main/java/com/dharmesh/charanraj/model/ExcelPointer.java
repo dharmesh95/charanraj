@@ -48,4 +48,9 @@ public class ExcelPointer {
 		this.colIndex = colIndex;
 	}
 
+	@Override
+	public String toString() {
+		return "ExcelPointer [rowIndex=" + rowIndex + ", colIndex=" + colIndex + "]";
+	}
+
 }
