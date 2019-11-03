@@ -34,5 +34,23 @@ public class GoogleAPIConstants {
 	public static final String DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
 	public static final String CALENDAR_ID = "primary";
 	public static final String REMINDER_METHOD = "popup";
+	
+	/*
+		Color ID	Color Name	Hex Code	Sample
+		undefined	Who knows	#039be5	
+		1			Lavender	#7986cb	
+		2			Sage		#33b679	
+		3			Grape		#8e24aa	
+		4			Flamingo	#e67c73	
+		5			Banana		#f6c026	
+		6			Tangerine	#f5511d	
+		7			Peacock		#039be5	
+		8			Graphite	#616161	
+		9			Blueberry	#3f51b5	
+		10			Basil		#0b8043	
+		11			Tomato		#d60000
+	*/
+	
+	public static final String FAMINGO_COLOR_ID = "4";
 
 }

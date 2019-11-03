@@ -96,6 +96,8 @@ public class CalendarService {
 
 			EventAttendee[] attendees = new EventAttendee[] { new EventAttendee().setEmail(to) };
 			event.setAttendees(Arrays.asList(attendees));
+			
+			event.setColorId(GoogleAPIConstants.FAMINGO_COLOR_ID); 
 
 			event = cService.events().insert(GoogleAPIConstants.CALENDAR_ID, event).execute();
 			/* System.out.printf("Event created: %s\n", event.getHtmlLink()); */
