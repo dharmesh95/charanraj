@@ -85,13 +85,13 @@ public class CalendarService {
 
 			DateTime startDateTime = new DateTime(
 					new SimpleDateFormat(GoogleAPIConstants.DATE_TIME_FORMAT).format(startDate));
-			EventDateTime start = new EventDateTime().setDateTime(startDateTime);
-//					.setTimeZone(GoogleAPIConstants.TZ_DB_NAME);
+			EventDateTime start = new EventDateTime().setTimeZone(GoogleAPIConstants.TZ_DB_NAME)
+					.setDateTime(startDateTime);
 			event.setStart(start);
 
 			DateTime endDateTime = new DateTime(
 					new SimpleDateFormat(GoogleAPIConstants.DATE_TIME_FORMAT).format(endDate));
-			EventDateTime end = new EventDateTime().setDateTime(endDateTime);//.setTimeZone(GoogleAPIConstants.TZ_DB_NAME);
+			EventDateTime end = new EventDateTime().setTimeZone(GoogleAPIConstants.TZ_DB_NAME).setDateTime(endDateTime);
 			event.setEnd(end);
 
 			EventAttendee[] attendees = new EventAttendee[] { new EventAttendee().setEmail(to) };
