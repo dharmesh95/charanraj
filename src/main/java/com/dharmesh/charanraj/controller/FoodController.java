@@ -14,7 +14,7 @@ import com.dharmesh.charanraj.service.FoodService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/food")
+@RequestMapping("/api/food")
 public class FoodController {
 
 	@Autowired

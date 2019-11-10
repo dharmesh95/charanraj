@@ -14,7 +14,7 @@ import com.dharmesh.charanraj.service.CleaningService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cleaning")
+@RequestMapping("/api/cleaning")
 public class CleaningController {
 
 	@Autowired

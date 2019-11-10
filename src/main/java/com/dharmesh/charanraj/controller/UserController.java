@@ -13,15 +13,15 @@ import com.dharmesh.charanraj.service.UserService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 
 	@RequestMapping("/getUser")
-	public User getUser(@RequestBody User userObj) {
-		return userService.getUser(userObj);
+	public User getUserByEmail(@RequestBody User userObj) {
+		return userService.getUserByEmail(userObj);
 	}
 
 	@RequestMapping("/getApprovedUsers")

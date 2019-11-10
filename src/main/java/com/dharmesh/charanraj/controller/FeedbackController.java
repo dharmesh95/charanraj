@@ -13,7 +13,7 @@ import com.dharmesh.charanraj.service.FeedbackService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping("/api/feedback")
 public class FeedbackController {
 
 	@Autowired

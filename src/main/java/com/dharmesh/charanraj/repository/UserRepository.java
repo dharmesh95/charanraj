@@ -14,4 +14,6 @@ public interface UserRepository extends MongoRepository<User, String> {
 
 	List<User> findByRoleNotIn(List<String> roles);
 
+	User findOneByEmailAndId(String email, String id);
+
 }

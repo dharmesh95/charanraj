@@ -12,7 +12,7 @@ import com.dharmesh.charanraj.service.ScheduleService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/schedule")
+@RequestMapping("/api/schedule")
 public class ScheduleController {
 	@Autowired
 	private ScheduleService scheduleService;

@@ -13,14 +13,14 @@ import com.dharmesh.charanraj.service.AdminService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
 
 	@RequestMapping("/getRequests")
-	public List<User> addFeedback() {
+	public List<User> getRequests() {
 		return adminService.getRequests();
 	}
 

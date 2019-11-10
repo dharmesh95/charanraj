@@ -14,7 +14,7 @@ import com.dharmesh.charanraj.service.RecommendationService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/recommendation")
+@RequestMapping("/api/recommendation")
 public class RecommendationController {
 
 	@Autowired

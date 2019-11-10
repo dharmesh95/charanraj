@@ -7,6 +7,17 @@ public class Access {
 	private boolean cleaning;
 	private boolean schedule;
 
+	public Access() {
+		super();
+	}
+
+	public Access(boolean flag) {
+		super();
+		if (flag) {
+			this.food = true;
+		}
+	}
+
 	public boolean isFood() {
 		return food;
 	}

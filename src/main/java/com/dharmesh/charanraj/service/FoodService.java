@@ -25,7 +25,7 @@ public class FoodService {
 
 		HashMap<String, Recommendation> allRecommendationMap = recommendationService
 				.getAllRecommendations(voteObj.getWeek().getWeekStartDate(), voteObj.getWeek().getWeekEndDate());
-		HashMap<String, Vote> allVotesByEmailMap = voteService.getAllVotesByEmail(voteObj.getEmail(),
+		HashMap<String, Vote> allVotesByEmailMap = voteService.getAllVotesByEmail(voteObj.getUser().getEmail(),
 				voteObj.getWeek().getWeekStartDate(), voteObj.getWeek().getWeekEndDate());
 		HashMap<String, Double> allVotesMap = voteService.getAllVotes(voteObj.getWeek().getWeekStartDate(),
 				voteObj.getWeek().getWeekEndDate());
@@ -43,10 +43,10 @@ public class FoodService {
 				foodModel.setPoints(allVotesMap.get(recommendationKey));
 			foodList.add(foodModel);
 		});
-		
+
 		/* sort */
 		Collections.sort(foodList, Collections.reverseOrder());
-		
+
 		return foodList;
 	}
 

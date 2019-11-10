@@ -15,7 +15,7 @@ import com.dharmesh.charanraj.service.CleaningService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/calendar")
+@RequestMapping("/api/calendar")
 public class CalendarController {
 
 	@Autowired

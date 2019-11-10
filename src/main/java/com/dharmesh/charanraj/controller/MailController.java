@@ -17,7 +17,7 @@ import com.google.api.services.gmail.Gmail;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/mail")
+@RequestMapping("/api/mail")
 public class MailController {
 
 	@Autowired

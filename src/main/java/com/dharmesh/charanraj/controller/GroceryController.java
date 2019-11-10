@@ -14,7 +14,7 @@ import com.dharmesh.charanraj.service.GroceryService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/grocery")
+@RequestMapping("/api/grocery")
 public class GroceryController {
 
 	@Autowired

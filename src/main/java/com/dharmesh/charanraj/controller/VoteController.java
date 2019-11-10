@@ -9,23 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dharmesh.charanraj.entity.Vote;
-import com.dharmesh.charanraj.model.VoteModel;
 import com.dharmesh.charanraj.model.Week;
 import com.dharmesh.charanraj.service.VoteService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/vote")
+@RequestMapping("/api/vote")
 public class VoteController {
 
 	@Autowired
 	private VoteService voteService;
-
-	@RequestMapping("/getAllVotesByEmail")
-	public HashMap<String, Vote> getAllVotesByEmail(@RequestBody VoteModel voteObj) {
-		return voteService.getAllVotesByEmail(voteObj.getEmail(), voteObj.getWeek().getWeekStartDate(),
-				voteObj.getWeek().getWeekEndDate());
-	}
 
 	@RequestMapping("/getAllVotes")
 	public HashMap<String, Double> getAllVotes(@RequestBody Week week) {

@@ -1,15 +1,17 @@
 package com.dharmesh.charanraj.model;
 
+import com.dharmesh.charanraj.entity.User;
+
 public class VoteModel {
-	private String email;
+	private User user;
 	private Week week;
 
-	public String getEmail() {
-		return email;
+	public User getUser() {
+		return user;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Week getWeek() {

@@ -25,6 +25,11 @@ public class User {
 	@Field("access")
 	private Access access;
 
+	public User() {
+		super();
+		this.access = new Access(false);
+	}
+
 	public String getId() {
 		return id;
 	}

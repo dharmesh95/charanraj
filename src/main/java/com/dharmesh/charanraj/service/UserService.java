@@ -1,13 +1,11 @@
 package com.dharmesh.charanraj.service;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dharmesh.charanraj.constants.UserConstants;
-import com.dharmesh.charanraj.entity.Access;
 import com.dharmesh.charanraj.entity.User;
 import com.dharmesh.charanraj.repository.UserRepository;
 
@@ -16,31 +14,31 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	public List<User> getApprovedUsers() {
-		List<String> roles = Arrays.asList(UserConstants.REJECTED_USER, UserConstants.UNKNOWN_USER);
-		return userRepository.findByRoleNotIn(roles);
+		return userRepository.findByRoleNotIn(UserConstants.NOT_APPROVED_ROLES);
 	}
 
-	public User getUser(User userObj) {
-		User user = userRepository.findOneByEmail(userObj.getEmail());
-		if (user == null) {
+	public User getUserByEmail(User newUserObj) {
+		User existingUser = userRepository.findOneByEmail(newUserObj.getEmail());
+		if (null == existingUser) {
 			/* set role */
-			userObj.setRole(UserConstants.NORMAL_USER);
+			newUserObj.setRole(UserConstants.UNKNOWN_USER);
 
-			/* set access permissions */
-			Access access = new Access();
-			access.setFood(true);
-			access.setGrocery(true);
-			access.setCleaning(true);
-			access.setSchedule(true);
-			userObj.setAccess(access);
-
-			userRepository.save(userObj);
-			return userObj;
+			userRepository.save(newUserObj);
+			return newUserObj;
+		} else {
+			userRepository.save(existingUser);
+			return existingUser;
 		}
-		userRepository.save(user);
-		return user;
+	}
+
+	public User getUserByEmailAndById(String email, String id) {
+		return userRepository.findOneByEmailAndId(email, id);
+	}
+
+	public User getUserByEmail(String email) {
+		return userRepository.findOneByEmail(email);
 	}
 
 }
