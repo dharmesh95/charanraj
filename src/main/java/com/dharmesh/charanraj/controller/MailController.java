@@ -29,8 +29,8 @@ public class MailController {
 
 		try {
 			Gmail gService = mailService.getService();
-			MimeMessage email = mailService.createEmail(to, GoogleAPIConstants.FROM, GoogleAPIConstants.SUBJECT,
-					GoogleAPIConstants.BODY_TEXT);
+			MimeMessage email = mailService.createEmail(to, GoogleAPIConstants.FROM,
+					GoogleAPIConstants.CLEANING_SUBJECT, GoogleAPIConstants.CLEANING_BODY_TEXT);
 			mailService.sendMessage(gService, GoogleAPIConstants.USER_ID, email);
 		} catch (IOException e) {
 			e.printStackTrace();
