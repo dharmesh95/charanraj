@@ -30,26 +30,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/* below order is very important */
-		/*http.cors()
-				.formLogin().disable()
-				.anyRequest().authenticated()
-				.and().httpBasic().authenticationEntryPoint(authenticationEntryPoint)
-				;*/
 		http
 		.cors()
         .and().csrf().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
 	        .authorizeRequests()
-	        	.antMatchers("/api/user/**").permitAll()
 				.antMatchers(UserConstants.STATIC_FILES).permitAll()
-		.and()
-			.authorizeRequests()
-			.antMatchers("/api/**/**").authenticated()
+				/* below order is important */
+				.antMatchers("/api/user/**").permitAll()
+				.antMatchers("/api/**/**").authenticated()
         .and()
-        	.formLogin()
-        .and()           
         	.httpBasic()
         ;
 	}
