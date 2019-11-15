@@ -8,17 +8,36 @@ Key features:
 - FOOD recommendation, voting
 - GROCERY list
 - CLEANING schedule
--  SCHEDULE of month
--  ADMIN features
+- SCHEDULE of month
+- ADMIN features
 - FEEDBACK
--  ABOUT US
+- ABOUT US
 
-Technologies Used:
+Backend:
 
 - Spring Boot
--  Mongo Crud Repository
+- Mongo Crud Repository
 - Spring Security
--  POI - Excel sheet
+- POI - Excel sheet
+- Google calendar invite
+- Google email
+
+Frontend:
+
 - React
 - Redux
 - Axios
+- Google login
+- Material UI
+- Autosuggest
+- Idle timer
+
+Database:
+
+- MongoDB Atlas Cluster
+- Triggers
+
+Deployment:
+
+- Heroku CI/CD pipeline
+- Uptime Robot monitor
