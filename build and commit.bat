@@ -20,7 +20,7 @@ echo moved all files in web app build moved to static folder
 
 git add .
 set /p commit_message="Enter commit message: "
-git commit -m "Auto Commited with message: %commit_message%"
+git commit -m "Auto Committed with message: %commit_message%"
 git push
 
 pause
