@@ -14,6 +14,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.dharmesh.charanraj.constants.UserConstants;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -28,9 +30,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().httpBasic().and().csrf().disable().formLogin().disable().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/api/user/**").permitAll().antMatchers("/api/**").authenticated();
+		/* below order is very important */
+		/*http.cors()
+				.formLogin().disable()
+				.anyRequest().authenticated()
+				.and().httpBasic().authenticationEntryPoint(authenticationEntryPoint)
+				;*/
+		http
+		.cors()
+        .and().csrf().disable()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+	        .authorizeRequests()
+	        	.antMatchers("/api/user/**").permitAll()
+				.antMatchers(UserConstants.STATIC_FILES).permitAll()
+		.and()
+			.authorizeRequests()
+			.antMatchers("/api/**/**").authenticated()
+        .and()
+        	.formLogin()
+        .and()           
+        	.httpBasic()
+        ;
 	}
 
 	@Bean
@@ -38,7 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("*"));
 		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
-		configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
+		configuration.setAllowedHeaders(
+				Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
 		configuration.setAllowCredentials(true);
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);

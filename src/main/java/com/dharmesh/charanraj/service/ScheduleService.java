@@ -10,14 +10,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.RegionUtil;
-import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +21,9 @@ import org.springframework.stereotype.Service;
 import com.dharmesh.charanraj.constants.ScheduleConstants;
 import com.dharmesh.charanraj.entity.Cleaning;
 import com.dharmesh.charanraj.entity.User;
+import com.dharmesh.charanraj.helper.ExcelSheetStyleHelper;
+import com.dharmesh.charanraj.model.CalendarMonth;
 import com.dharmesh.charanraj.model.ExcelPointer;
-import com.dharmesh.charanraj.model.ScheduleCalendar;
 import com.dharmesh.charanraj.model.ScheduleCell;
 
 @Service
@@ -36,16 +33,30 @@ public class ScheduleService {
 	private CleaningService cleaningService;
 
 	public byte[] generate() throws FileNotFoundException, IOException {
+
+		/* fetch cleaning schedule data */
+		List<Cleaning> fullCleaningSchedule = cleaningService.getFullCleaningSchedule();
+
+		Workbook workbook = getWorkBook(fullCleaningSchedule);
+
+		/* convert workbook to byte array */
+		byte[] byteArray;
+		try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+			workbook.write(outputStream);
+			byteArray = outputStream.toByteArray();
+		}
+		return byteArray;
+	}
+
+	private Workbook getWorkBook(List<Cleaning> fullCleaningSchedule) throws FileNotFoundException, IOException {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet = workbook.createSheet(ScheduleConstants.SHEET_NAME);
 
 		/* set year, month name, weekdays name */
 		setHeaders(workbook);
 
-		/* fetch cleaning schedule data */
-		List<Cleaning> fullCleaningSchedule = cleaningService.getFullCleaningSchedule();
 		/* fetch dates in the calendar */
-		ScheduleCalendar scheduleCalendar = getScheduleCalendar(fullCleaningSchedule);
+		CalendarMonth scheduleCalendar = getScheduleCalendar(fullCleaningSchedule);
 
 		/* set dates */
 		ExcelPointer pointer = new ExcelPointer(2, 0);
@@ -55,7 +66,7 @@ public class ScheduleService {
 			for (ScheduleCell scheduleCell : week) {
 				Cell cell = row.createCell(pointer.postIncrementCol());
 				cell.setCellValue(scheduleCell.getDateDisplayValue());
-				cell.setCellStyle(getDateCellStyle(workbook));
+				cell.setCellStyle(ExcelSheetStyleHelper.getDateCellStyle(workbook));
 			}
 			row = sheet.createRow(pointer.postIncrementRow());
 			row.setHeightInPoints(ScheduleConstants.ROW_HEIGHT);
@@ -66,9 +77,9 @@ public class ScheduleService {
 					cell.setCellValue(week.get(i).getUserName1() + "\n" + week.get(i).getUserName2());
 				/* Wednesday */
 				if (i == 2)
-					cell.setCellStyle(getDataCellStyle(workbook, true));
+					cell.setCellStyle(ExcelSheetStyleHelper.getDataCellStyle(workbook, true));
 				else
-					cell.setCellStyle(getDataCellStyle(workbook, false));
+					cell.setCellStyle(ExcelSheetStyleHelper.getDataCellStyle(workbook, false));
 			}
 		}
 
@@ -81,7 +92,7 @@ public class ScheduleService {
 		CellRangeAddress cellRangeAddress = new CellRangeAddress(pointer.getRowIndex(), pointer.getRowIndex(),
 				pointer.getColIndex(), pointer.getColIndex() + 4);
 		sheet.addMergedRegion(cellRangeAddress);
-		setBordersCellStyle(cellRangeAddress, sheet, workbook);
+		ExcelSheetStyleHelper.setBordersCellStyle(cellRangeAddress, sheet, workbook);
 
 		pointer.postIncrementRow();
 		sheet.addMergedRegion(new CellRangeAddress(pointer.getRowIndex(), pointer.getRowIndex(), pointer.getColIndex(),
@@ -90,18 +101,14 @@ public class ScheduleService {
 		/* set styles */
 		setStyles(workbook);
 
-		/* convert workbook to byte array */
-		try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-			workbook.write(outputStream);
-			return outputStream.toByteArray();
-		}
+		return workbook;
 	}
 
 	private void setHeaders(Workbook workbook) {
 		Sheet sheet = workbook.getSheet(ScheduleConstants.SHEET_NAME);
 		Row row0 = sheet.createRow(0);
 		Cell cell0 = row0.createCell(0);
-		cell0.setCellStyle(getYearCellStyle(workbook));
+		cell0.setCellStyle(ExcelSheetStyleHelper.getYearCellStyle(workbook));
 		cell0.setCellStyle(workbook.createCellStyle());
 		cell0.setCellValue(Calendar.getInstance().get(Calendar.YEAR));
 		Cell cell1 = row0.createCell(1);
@@ -115,7 +122,7 @@ public class ScheduleService {
 		}
 	}
 
-	private ScheduleCalendar getScheduleCalendar(List<Cleaning> fullCleaningSchedule) {
+	private CalendarMonth getScheduleCalendar(List<Cleaning> fullCleaningSchedule) {
 		List<ScheduleCell> cells = new ArrayList<ScheduleCell>();
 
 		Calendar cal = Calendar.getInstance();
@@ -166,7 +173,7 @@ public class ScheduleService {
 		}
 		List<List<ScheduleCell>> weeks = divideInWeeks(cells);
 
-		ScheduleCalendar calendar = new ScheduleCalendar();
+		CalendarMonth calendar = new CalendarMonth();
 		calendar.setNoOfLastMonthDays(endPrevious - startPrevious + 1);
 		calendar.setNoOfCurrentMonthDays(noOfDaysInCurrentMonth);
 		calendar.setNoOfNextMonthDays(endNext - startNext + 1);
@@ -192,115 +199,19 @@ public class ScheduleService {
 		Row row0 = sheet.getRow(0);
 		row0.setHeightInPoints(50);
 
-		row0.getCell(0).setCellStyle(getYearCellStyle(workbook));
-		row0.getCell(1).setCellStyle(getMonthCellStyle(workbook));
+		row0.getCell(0).setCellStyle(ExcelSheetStyleHelper.getYearCellStyle(workbook));
+		row0.getCell(1).setCellStyle(ExcelSheetStyleHelper.getMonthCellStyle(workbook));
 
 		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 1, 6);
 		sheet.addMergedRegion(cellRangeAddress);
-		setBordersCellStyle(cellRangeAddress, sheet, workbook);
+		ExcelSheetStyleHelper.setBordersCellStyle(cellRangeAddress, sheet, workbook);
 
 		Row row1 = sheet.getRow(1);
 		for (int i = 0; i < 7; i++) {
-			row1.getCell(i).setCellStyle(getHeaderCellStyle(workbook,
+			row1.getCell(i).setCellStyle(ExcelSheetStyleHelper.getHeaderCellStyle(workbook,
 					i % 2 == 0 ? ScheduleConstants.LIME_COLOR : ScheduleConstants.TEAL_COLOR));
 			sheet.setColumnWidth(i, ScheduleConstants.COLUMN_WIDTH);
 		}
-	}
-
-	private CellStyle getHeaderCellStyle(Workbook wb, short color) {
-		CellStyle style = wb.createCellStyle();
-		style.setFont(getHeaderFont(wb));
-		style.setFillForegroundColor(color);
-		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-		style.setAlignment(CellStyle.ALIGN_CENTER);
-
-		style.setBorderLeft(CellStyle.BORDER_THICK);
-		style.setBorderRight(CellStyle.BORDER_THICK);
-		style.setLeftBorderColor(ScheduleConstants.WHITE_COLOR);
-		style.setRightBorderColor(ScheduleConstants.WHITE_COLOR);
-
-		return style;
-	}
-
-	private CellStyle getMonthCellStyle(Workbook wb) {
-		CellStyle style = wb.createCellStyle();
-		style.setFont(getMonthFont(wb));
-		style.setFillForegroundColor(ScheduleConstants.WHITE_COLOR);
-		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-		style.setAlignment(CellStyle.ALIGN_CENTER);
-		return style;
-	}
-
-	private CellStyle getYearCellStyle(Workbook wb) {
-		CellStyle style = wb.createCellStyle();
-		style.setFont(getYearFont(wb));
-		style.setFillForegroundColor(ScheduleConstants.TEAL_COLOR);
-		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-		style.setAlignment(CellStyle.ALIGN_CENTER);
-		return style;
-	}
-
-	private CellStyle getDataCellStyle(Workbook wb, boolean isWednesday) {
-		CellStyle style = wb.createCellStyle();
-		if (isWednesday) {
-			style.setFillForegroundColor(ScheduleConstants.GREY_COLOR);
-			style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-		}
-		style.setWrapText(true);
-		style.setVerticalAlignment(CellStyle.VERTICAL_TOP);
-		style.setBorderLeft(CellStyle.BORDER_THIN);
-		style.setBorderRight(CellStyle.BORDER_THIN);
-		style.setBorderBottom(CellStyle.BORDER_THIN);
-		return style;
-	}
-
-	private CellStyle getDateCellStyle(Workbook wb) {
-		CellStyle style = wb.createCellStyle();
-		style.setFont(getDateFont(wb, false));
-		style.setAlignment(CellStyle.ALIGN_LEFT);
-		style.setBorderTop(CellStyle.BORDER_THIN);
-		style.setBorderLeft(CellStyle.BORDER_THIN);
-		style.setBorderRight(CellStyle.BORDER_THIN);
-		return style;
-	}
-
-	private void setBordersCellStyle(CellRangeAddress cellRangeAddress, Sheet sheet, Workbook workbook) {
-		RegionUtil.setBorderTop(CellStyle.BORDER_THIN, cellRangeAddress, sheet, workbook);
-		RegionUtil.setBorderLeft(CellStyle.BORDER_THIN, cellRangeAddress, sheet, workbook);
-		RegionUtil.setBorderRight(CellStyle.BORDER_THIN, cellRangeAddress, sheet, workbook);
-	}
-
-	private Font getDateFont(Workbook wb, boolean isBold) {
-		Font dateFont = wb.createFont();
-		dateFont.setFontHeightInPoints(ScheduleConstants.DATE_FONT_SIZE);
-		if (isBold) {
-			dateFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
-		}
-		return dateFont;
-	}
-
-	private Font getYearFont(Workbook wb) {
-		Font yearFont = wb.createFont();
-		yearFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
-		yearFont.setColor(ScheduleConstants.WHITE_COLOR);
-		yearFont.setFontHeightInPoints(ScheduleConstants.HEADER_FONT_SIZE);
-		return yearFont;
-	}
-
-	private Font getMonthFont(Workbook wb) {
-		Font monthFont = wb.createFont();
-		monthFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
-		monthFont.setColor(ScheduleConstants.TEAL_COLOR);
-		monthFont.setFontHeightInPoints(ScheduleConstants.HEADER_FONT_SIZE);
-		return monthFont;
-	}
-
-	private Font getHeaderFont(Workbook wb) {
-		Font headerFont = wb.createFont();
-		headerFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
-		headerFont.setColor(ScheduleConstants.WHITE_COLOR);
-		headerFont.setFontHeightInPoints(ScheduleConstants.DAY_FONT_SIZE);
-		return headerFont;
 	}
 
 }

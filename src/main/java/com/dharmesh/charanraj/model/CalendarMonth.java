@@ -2,7 +2,7 @@ package com.dharmesh.charanraj.model;
 
 import java.util.List;
 
-public class ScheduleCalendar {
+public class CalendarMonth {
 	private int noOfLastMonthDays;
 	private int noOfCurrentMonthDays;
 	private int noOfNextMonthDays;

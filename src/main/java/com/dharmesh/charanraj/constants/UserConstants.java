@@ -10,7 +10,19 @@ public class UserConstants {
 	public static final String REJECTED_USER = "R";
 	public static final String UNKNOWN_USER = "U";
 
-	public static final List<String> NOT_APPROVED_ROLES = Arrays.asList(
-			UserConstants.REJECTED_USER,
+	public static final List<String> NOT_APPROVED_ROLES = Arrays.asList(UserConstants.REJECTED_USER,
 			UserConstants.UNKNOWN_USER);
+
+	public static final String[] STATIC_FILES = {"/",
+			"/**.json",
+		    "/**.ico",
+		    "/**/*.png",
+		    "/**/*.gif",
+		    "/**/*.svg",
+		    "/**/*.jpg",
+		    "/**/*.html",
+		    "/**/*.css",
+		    "/**/*.js"
+		};
+
 }
