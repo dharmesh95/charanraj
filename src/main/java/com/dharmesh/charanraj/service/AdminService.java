@@ -28,7 +28,7 @@ public class AdminService {
 		if (UserConstants.REJECTED_USER.equals(userObj.getRole())) {
 			userRepository.deleteById(userObj.getId());
 		} else if (UserConstants.NORMAL_USER.equals(userObj.getRole())) {
-			Access access = null == userObj.getAccess() ? new Access(true) : userObj.getAccess();
+			Access access = (null == userObj.getAccess()) ? new Access(true) : userObj.getAccess();
 			access.setFood(true);
 			userRepository.save(userObj);
 		} else {

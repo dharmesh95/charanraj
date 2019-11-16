@@ -6,6 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import lombok.Data;
+
+@Data
 @Document(collection = "food_recommendation")
 public class Recommendation {
 
@@ -20,42 +23,5 @@ public class Recommendation {
 
 	@Field("food_name")
 	private String foodName;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public String getFoodName() {
-		return foodName;
-	}
-
-	public void setFoodName(String foodName) {
-		this.foodName = foodName;
-	}
-
-	@Override
-	public String toString() {
-		return "Recommendation [id=" + id + ", email=" + email + ", date=" + date + ", foodName=" + foodName + "]";
-	}
 
 }

@@ -1,5 +1,8 @@
 package com.dharmesh.charanraj.model;
 
+import lombok.Data;
+
+@Data
 public class ExcelPointer {
 	private int rowIndex;
 	private int colIndex;
@@ -30,27 +33,6 @@ public class ExcelPointer {
 
 	public int postDecrementCol() {
 		return this.colIndex--;
-	}
-
-	public int getRowIndex() {
-		return rowIndex;
-	}
-
-	public void setRowIndex(int rowIndex) {
-		this.rowIndex = rowIndex;
-	}
-
-	public int getColIndex() {
-		return colIndex;
-	}
-
-	public void setColIndex(int colIndex) {
-		this.colIndex = colIndex;
-	}
-
-	@Override
-	public String toString() {
-		return "ExcelPointer [rowIndex=" + rowIndex + ", colIndex=" + colIndex + "]";
 	}
 
 }
