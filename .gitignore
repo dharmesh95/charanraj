@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Web app node modules ###
+/src/main/web/charanraj-app/node_modules/

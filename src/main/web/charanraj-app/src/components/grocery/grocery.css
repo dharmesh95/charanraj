@@ -1,0 +1,27 @@
+.grocery-list-header {
+    margin-top: 15px;
+    padding-top: 15px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    padding-left: 15px;
+}
+
+.send-grocery {
+    margin: 15px 15px 0px 15px;
+    padding-bottom: 15px;
+}
+
+.grocery-text-field {
+    width: 100%;
+}
+
+.send-icon {
+    margin-left: 10px;
+    height: 15px;
+    fill: white;
+}
+
+.role {
+    font-size: 12px !important;
+    color: rgba(0, 0, 0, 0.54);
+}
