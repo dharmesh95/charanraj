@@ -10,21 +10,25 @@ export default class EditableUserInput extends Component {
     super(props);
     this.name = props.user.name;
     this.state = { editUserName: false };
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.save = this.save.bind(this);
   }
 
-  save(cleaningObj, userName) {
+  save = (cleaningObj, userName) => {
     this.name = this.props.value;
     this.props.save(cleaningObj, userName);
-  }
+  };
 
-  toggleEdit() {
+  toggleEdit = () => {
     this.setState({ ...this.state, editUserName: !this.state.editUserName });
-  }
+  };
 
   render() {
-    const { cleaningObj, suggestions, userName, placeholder, updateUser } = this.props;
+    const {
+      cleaningObj,
+      suggestions,
+      userName,
+      placeholder,
+      updateUser
+    } = this.props;
     const { editUserName } = this.state;
     return (
       <div>

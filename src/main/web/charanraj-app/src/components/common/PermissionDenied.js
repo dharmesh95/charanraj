@@ -11,7 +11,7 @@ export default function PermissionDenied(props) {
       variant="caption"
       className="details-header permission-denied"
     >
-      {ROLES[profileObj.role]
+      {profileObj && ROLES[profileObj.role]
         ? ROLES[profileObj.role].message
         : UNKNOWN_MESSAGE}
     </Typography>

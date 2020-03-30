@@ -1,4 +1,9 @@
-import { Button, ExpansionPanel, ExpansionPanelSummary, Typography } from "@material-ui/core";
+import {
+  Button,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  Typography
+} from "@material-ui/core";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -6,9 +11,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getData, postData } from "../../../actions/action";
 import { DEFAULT } from "../../../constants/types.constants";
-import { createUrl, DELETE_CLEANING_SCHEDULE_URL, SAVE_CLEANING_SCHEDULE_URL } from "../../../constants/url.constants";
+import {
+  createUrl,
+  DELETE_CLEANING_SCHEDULE_URL,
+  SAVE_CLEANING_SCHEDULE_URL
+} from "../../../constants/url.constants";
 import { getHeaders } from "../../../constants/user.constants";
-import { getFirstDayofTheMonth, getLastDayofTheMonth } from "../../../helpers/date.helper";
+import {
+  getFirstDayofTheMonth,
+  getLastDayofTheMonth
+} from "../../../helpers/date.helper";
 import { findUserByName } from "../../../helpers/user.helper";
 import TrashIcon from "../../../icons/TrashIcon";
 import "./../../cleaning/cleaning.css";
@@ -27,16 +39,13 @@ class CleaningAdmin extends Component {
   constructor(props) {
     super(props);
     this.state = this.INITIAL_STATE;
-    this.updateUser = this.updateUser.bind(this);
-    this.updateDate = this.updateDate.bind(this);
-    this.reset = this.reset.bind(this);
   }
 
-  reset() {
+  reset = () => {
     this.setState(this.INITIAL_STATE);
-  }
+  };
 
-  addToList() {
+  addToList = () => {
     const { userName1, userName2 } = this.state;
     let { list } = this.state;
     const { approvedUsers } = this.props;
@@ -46,15 +55,15 @@ class CleaningAdmin extends Component {
       list.push({ user1, user2 });
       this.setState({ ...this.state, list });
     }
-  }
+  };
 
-  updateUser(userName, value) {
+  updateUser = (userName, value) => {
     this.setState({ ...this.state, [userName]: value });
-  }
+  };
 
-  updateDate(date, value) {
+  updateDate = (date, value) => {
     this.setState({ ...this.state, [date]: value });
-  }
+  };
 
   render() {
     const { list, userName1, userName2, firstDate, lastDate } = this.state;
@@ -142,7 +151,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CleaningAdmin);
+export default connect(mapStateToProps, mapDispatchToProps)(CleaningAdmin);

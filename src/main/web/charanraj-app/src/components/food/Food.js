@@ -1,10 +1,21 @@
-import { FormControl, InputLabel, MenuItem, Select, Typography } from "@material-ui/core";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography
+} from "@material-ui/core";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../actions/action";
 import { continuousCall } from "../../constants/time.constants";
 import { FETCH_VOTE_DATA } from "../../constants/types.constants";
-import { createUrl, DELETE_RECO_URL, GET_VOTE_DATA_URL, POST_VOTE_URL } from "../../constants/url.constants";
+import {
+  createUrl,
+  DELETE_RECO_URL,
+  GET_VOTE_DATA_URL,
+  POST_VOTE_URL
+} from "../../constants/url.constants";
 import { ACCESS_FOOD_KEY, getHeaders } from "../../constants/user.constants";
 import { isAccessible } from "../../helpers/visibility.helper";
 import VoteModel from "../../models/VoteModel";
@@ -20,14 +31,9 @@ class Food extends Component {
     this.state = {
       week: props.week
     };
-    this.vote = this.vote.bind(this);
-    this.fetchAllFoodData = this.fetchAllFoodData.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.updateWeek = this.updateWeek.bind(this);
-    this.deleteRecommendation = this.deleteRecommendation.bind(this);
   }
 
-  vote(recommendationID, points) {
+  vote = (recommendationID, points) => {
     const { profileObj, addVote, fetchVoteData } = this.props;
     const { week } = this.state;
     let vote = new VoteModel(
@@ -39,34 +45,34 @@ class Food extends Component {
     );
     addVote(profileObj, week.startDate.value, week.endDate.value, vote);
     fetchVoteData(profileObj, week.startDate.value, week.endDate.value);
-  }
+  };
 
-  deleteRecommendation(id) {
+  deleteRecommendation = id => {
     const { profileObj, deleteRecommendationById } = this.props;
     deleteRecommendationById(id, profileObj);
     setTimeout(() => {
       this.fetchAllFoodData();
     }, 500);
-  }
+  };
 
-  handleChange(event) {
+  handleChange = event => {
     const { currentWeek, lastWeek } = this.props;
     let week = currentWeek;
     if (lastWeek.startDate.displayValue === event.target.value) {
       week = lastWeek;
     }
     this.setState({ ...this.state, week });
-  }
+  };
 
-  updateWeek(week) {
+  updateWeek = week => {
     this.setState({ ...this.state, week });
-  }
+  };
 
-  fetchAllFoodData() {
+  fetchAllFoodData = () => {
     const { fetchVoteData, profileObj } = this.props;
     const { week } = this.state;
     fetchVoteData(profileObj, week.startDate.value, week.endDate.value);
-  }
+  };
 
   componentDidMount() {
     clearInterval(this.foodInterval);

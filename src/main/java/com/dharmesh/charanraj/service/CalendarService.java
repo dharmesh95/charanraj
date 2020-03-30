@@ -1,16 +1,5 @@
 package com.dharmesh.charanraj.service;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-
-import org.springframework.stereotype.Service;
-
 import com.dharmesh.charanraj.constants.GoogleAPIConstants;
 import com.dharmesh.charanraj.helper.DateHelper;
 import com.google.api.client.auth.oauth2.Credential;
@@ -28,6 +17,16 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
+import org.springframework.stereotype.Service;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 
 @Service
 public class CalendarService {
@@ -97,7 +96,7 @@ public class CalendarService {
 			EventAttendee[] attendees = new EventAttendee[] { new EventAttendee().setEmail(to) };
 			event.setAttendees(Arrays.asList(attendees));
 			
-			event.setColorId(GoogleAPIConstants.FAMINGO_COLOR_ID); 
+			event.setColorId(GoogleAPIConstants.FLAMINGO_COLOR_ID);
 
 			event = cService.events().insert(GoogleAPIConstants.CALENDAR_ID, event).execute();
 			/* System.out.printf("Event created: %s\n", event.getHtmlLink()); */

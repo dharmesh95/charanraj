@@ -3,23 +3,24 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../actions/action";
 import { DOWNLOAD_CLEANING_SCHEDULE } from "../../constants/types.constants";
-import { createUrl, DOWNLOAD_SCHEDULE_URL } from "../../constants/url.constants";
-import { ACCESS_SCHEDULE_KEY, getHeaders } from "../../constants/user.constants";
+import {
+  createUrl,
+  DOWNLOAD_SCHEDULE_URL
+} from "../../constants/url.constants";
+import {
+  ACCESS_SCHEDULE_KEY,
+  getHeaders
+} from "../../constants/user.constants";
 import { isAccessible } from "../../helpers/visibility.helper";
 import DownloadIcon from "../../icons/DownloadIcon";
 import PermissionDenied from "../common/PermissionDenied";
 import "./schedule.css";
 
 class Schedule extends Component {
-  constructor(props) {
-    super(props);
-    this.downloadSchedule = this.downloadSchedule.bind(this);
-  }
-
-  downloadSchedule() {
+  downloadSchedule = () => {
     const { profileObj, downloadSchedule } = this.props;
     downloadSchedule(profileObj);
-  }
+  };
 
   render() {
     const { profileObj } = this.props;

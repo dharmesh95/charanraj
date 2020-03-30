@@ -37,6 +37,6 @@ export const postData = (
     });
 };
 
-export const resetState = type => dispatch => {
-  dispatch({ type, data: {} });
-};
+// export const resetState = type => dispatch => {
+//   dispatch({ type, data: {} });
+// };

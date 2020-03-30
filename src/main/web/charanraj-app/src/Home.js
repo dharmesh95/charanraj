@@ -1,43 +1,43 @@
 import React, { Component } from "react";
 import IdleTimer from "react-idle-timer";
 import { connect } from "react-redux";
-import { postData, resetState } from "./actions/action";
+import { postData /* resetState */ } from "./actions/action";
 import CircularIndeterminate from "./components/common/CircularIndeterminate";
 import { IDLE_TIME } from "./constants/time.constants";
-import { FETCH_USER, LOGOUT } from "./constants/types.constants";
+import { FETCH_USER /* LOGOUT */ } from "./constants/types.constants";
 import { createUrl, GET_USER_URL } from "./constants/url.constants";
 import { getCurrentWeek, getLastWeek } from "./helpers/date.helper";
 import { getProfileObj, removeProfileObj } from "./helpers/session.helper";
-import MiniDrawer from "./MiniDrawer";
+import { MiniDrawer } from "./MiniDrawer";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { profileObj: null };
     this.idleTimer = null;
-    this.logoutSuccess = this.logoutSuccess.bind(this);
-    this.onIdle = this.onIdle.bind(this);
   }
 
-  onIdle() {
+  onIdle = () => {
     console.log("user was idle for " + IDLE_TIME / (60 * 1000) + " minutes ");
     console.log("logging user out");
     this.logoutSuccess();
-  }
+  };
 
-  logoutSuccess() {
+  logoutSuccess = () => {
+    const { history } = this.props;
     removeProfileObj();
-    this.props.history.push("/login");
-  }
+    history.push("/login");
+  };
 
-  checkIfUserIsLoggedIn() {
+  checkIfUserIsLoggedIn = () => {
+    const { getUser, history } = this.props;
     let profileObj = getProfileObj();
     if (profileObj) {
-      this.props.getUser(profileObj);
+      getUser(profileObj);
     } else {
-      this.props.history.push("/login");
+      history.push("/login");
     }
-  }
+  };
 
   componentDidMount() {
     this.checkIfUserIsLoggedIn();
@@ -72,7 +72,6 @@ class Home extends Component {
             week={currentWeek}
             currentWeek={currentWeek}
             lastWeek={lastWeek}
-            {...this.props}
           />
         ) : (
           <CircularIndeterminate />
@@ -93,8 +92,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     getUser: profileObj =>
-      dispatch(postData(createUrl(GET_USER_URL), profileObj, {}, FETCH_USER)),
-    resetState: () => dispatch(resetState(LOGOUT))
+      dispatch(postData(createUrl(GET_USER_URL), profileObj, {}, FETCH_USER))
+    // resetState: () => dispatch(resetState(LOGOUT))
   };
 }
 

@@ -1,4 +1,3 @@
-
-export const transformDefault = (data) => {
-    return data;
-}
+export const transformDefault = data => {
+  return data;
+};

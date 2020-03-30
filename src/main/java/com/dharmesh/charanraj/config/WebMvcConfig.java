@@ -10,7 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	/*
 	 * The primary purpose of this method is to redirect requests to index.html. If
 	 * we don't do this config then when the user tries to directly go to the /login
-	 * url tomcat server will try to search for a login dirtectory and an index.html
+	 * url tomcat server will try to search for a login directory and an index.html
 	 * inside it.
 	 */
 	@Override

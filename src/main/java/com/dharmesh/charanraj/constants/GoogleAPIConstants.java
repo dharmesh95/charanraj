@@ -1,10 +1,10 @@
 package com.dharmesh.charanraj.constants;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.gmail.GmailScopes;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class GoogleAPIConstants {
 
@@ -51,7 +51,7 @@ public class GoogleAPIConstants {
 		11			Tomato		#d60000
 	*/
 	
-	public static final String FAMINGO_COLOR_ID = "4";
+	public static final String FLAMINGO_COLOR_ID = "4";
 
 	/* feedback email */
 	public static final String FEEDBACK_SUBJECT = "Feedback - Ghar Ek Mandir";

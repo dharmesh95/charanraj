@@ -13,12 +13,11 @@ class Feedback extends Component {
   constructor(props) {
     super(props);
     this.state = { feedback: "" };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange($event) {
+  handleChange = $event => {
     this.setState({ feedback: $event.target.value });
-  }
+  };
 
   sendFeedback = () => {
     const { feedback } = this.state;
@@ -73,12 +72,13 @@ function mapDispatchToProps(dispatch) {
   return {
     saveFeedback: (feedbackObj, profileObj) =>
       dispatch(
-        postData(createUrl(ADD_FEEDBACK_URL), feedbackObj, getHeaders(profileObj))
+        postData(
+          createUrl(ADD_FEEDBACK_URL),
+          feedbackObj,
+          getHeaders(profileObj)
+        )
       )
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

@@ -18,8 +18,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 import React from "react";
 import { GoogleLogout } from "react-google-login";
-import { Redirect, Route } from "react-router-dom";
-import AboutUs from "./components/about-us/AboutUs";
+import { Redirect, Route, withRouter } from "react-router-dom";
 import Admin from "./components/admin/Admin";
 import Cleaning from "./components/cleaning/Cleaning";
 import PermissionDenied from "./components/common/PermissionDenied";
@@ -27,7 +26,11 @@ import Feedback from "./components/feedback/Feedback";
 import Food from "./components/food/Food";
 import Grocery from "./components/grocery/Grocery";
 import Schedule from "./components/schedule/Schedule";
-import { route } from "./constants/route.constants";
+import {
+  route,
+  categories,
+  otherCategories
+} from "./constants/route.constants";
 import { isAdminVisibile } from "./helpers/visibility.helper";
 import AddressCardIcon from "./icons/AddressCardIcon";
 import BroomIcon from "./icons/BroomIcon";
@@ -37,6 +40,7 @@ import "./MiniDrawer.css";
 import CalendarIcon from "./icons/CalendarIcon";
 import UtensilsIcon from "./icons/UtensilsIcon";
 import ShoppingBasketIcon from "./icons/ShoppingBasketIcon";
+import { AboutUs } from "./components/about-us/AboutUs";
 
 const drawerWidth = 240;
 
@@ -108,7 +112,7 @@ function navigate(props, path) {
   props.history.push(path);
 }
 
-export default function MiniDrawer(props) {
+export const MiniDrawer = withRouter(props => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -223,7 +227,7 @@ export default function MiniDrawer(props) {
         </div>
         <Divider />
         <List>
-          {["Food", "Grocery", "Cleaning", "Schedule"].map((text, index) => (
+          {categories.map((text, index) => (
             <ListItem
               button
               key={text}
@@ -243,7 +247,7 @@ export default function MiniDrawer(props) {
         </List>
         <Divider />
         <List>
-          {["Admin", "Feedback", "About Us"].map((text, index) => (
+          {otherCategories.map((text, index) => (
             <ListItem
               button
               key={text}
@@ -296,12 +300,8 @@ export default function MiniDrawer(props) {
           path="/home/feedback"
           render={() => <Feedback {...props} />}
         />
-        <Route
-          exact
-          path="/home/about-us"
-          render={() => <AboutUs {...props} />}
-        />
+        <Route exact path="/home/about-us" render={() => <AboutUs />} />
       </main>
     </div>
   );
-}
+});

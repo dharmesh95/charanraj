@@ -1,4 +1,11 @@
-import { Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@material-ui/core";
+import {
+  Divider,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography
+} from "@material-ui/core";
 import React, { Component } from "react";
 import { USER_NAME_MAPPING } from "../../../../constants/user.constants";
 import { checkIfEmpty } from "../../../../helpers/common.helper";
@@ -15,21 +22,19 @@ export default class EditableList extends Component {
       userName1: "",
       userName2: ""
     };
-    this.updateUser = this.updateUser.bind(this);
-    this.save = this.save.bind(this);
   }
 
-  updateUser(userName, value) {
+  updateUser = (userName, value) => {
     this.setState({ ...this.state, [userName]: value });
-  }
+  };
 
-  save(cleaningObj, key) {
+  save = (cleaningObj, key) => {
     const { approvedUsers, updateSchedule, profileObj } = this.props;
     const userName = this.state[key];
     const updatedUser = findUserByName(approvedUsers, userName);
     cleaningObj[USER_NAME_MAPPING[key]] = updatedUser;
     updateSchedule(cleaningObj, profileObj);
-  }
+  };
 
   render() {
     const { userName1, userName2 } = this.state;

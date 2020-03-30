@@ -13,12 +13,10 @@ import "./../food.css";
 class Recommendation extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
     this.state = { name: "" };
-    this.addReco = this.addReco.bind(this);
   }
 
-  addReco() {
+  addReco = () => {
     const { name } = this.state;
     const {
       profileObj,
@@ -41,11 +39,11 @@ class Recommendation extends Component {
         fetchAllFoodData();
       }, 500);
     }
-  }
+  };
 
-  handleChange($event) {
+  handleChange = $event => {
     this.setState({ name: $event.target.value });
-  }
+  };
 
   render() {
     const { name } = this.state;
@@ -96,7 +94,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Recommendation);
+export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);

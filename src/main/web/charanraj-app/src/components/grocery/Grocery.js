@@ -15,18 +15,22 @@ class Grocery extends Component {
   constructor(props) {
     super(props);
     this.state = { grocery: "" };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange($event) {
+  handleChange = $event => {
     this.setState({ grocery: $event.target.value });
-  }
+  };
 
   sendGrocery = () => {
     const { grocery } = this.state;
     const { profileObj, sendGrocery } = this.props;
     if (grocery && grocery.length > 2) {
-      let groceryObj = new GroceryModel(profileObj, grocery, new Date(), profileObj.houseId);
+      let groceryObj = new GroceryModel(
+        profileObj,
+        grocery,
+        new Date(),
+        profileObj.houseId
+      );
       sendGrocery(groceryObj, profileObj);
       this.setState({ grocery: "" });
     }
@@ -89,7 +93,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Grocery);
+export default connect(mapStateToProps, mapDispatchToProps)(Grocery);
