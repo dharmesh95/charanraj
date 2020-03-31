@@ -1,4 +1,11 @@
-import { Button, Divider, Grid, IconButton, ListItem, ListItemAvatar } from "@material-ui/core";
+import {
+  Button,
+  Divider,
+  Grid,
+  IconButton,
+  ListItem,
+  ListItemAvatar
+} from "@material-ui/core";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import List from "@material-ui/core/List";
@@ -6,7 +13,15 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Component, default as React } from "react";
-import { ACCESS_CLEANING_KEY, ACCESS_FOOD_KEY, ACCESS_GROCERY_KEY, ACCESS_SCHEDULE_KEY, ADMIN_USER, NORMAL_USER, ROLES } from "../../../constants/user.constants";
+import {
+  ACCESS_CLEANING_KEY,
+  ACCESS_FOOD_KEY,
+  ACCESS_GROCERY_KEY,
+  ACCESS_SCHEDULE_KEY,
+  ADMIN_USER,
+  NORMAL_USER,
+  ROLES
+} from "../../../constants/user.constants";
 import { checkIfEmpty } from "../../../helpers/common.helper";
 import { isAdmin, isSuperAdmin } from "../../../helpers/visibility.helper";
 import BroomIcon from "../../../icons/BroomIcon";
@@ -16,6 +31,7 @@ import UtensilsIcon from "../../../icons/UtensilsIcon";
 import CircularIndeterminate from "../../common/CircularIndeterminate";
 import "./../../common/common.css";
 import "./users.css";
+import { GREY_COLOR, GREEN_COLOR } from "../../../constants/color.constants";
 
 export default class Users extends Component {
   render() {
@@ -75,9 +91,9 @@ export default class Users extends Component {
                                   color={
                                     user.access
                                       ? user.access.food
-                                        ? "green"
-                                        : "grey"
-                                      : "grey"
+                                        ? GREEN_COLOR
+                                        : GREY_COLOR
+                                      : GREY_COLOR
                                   }
                                 />
                               </IconButton>
@@ -92,9 +108,9 @@ export default class Users extends Component {
                                   color={
                                     user.access
                                       ? user.access.grocery
-                                        ? "green"
-                                        : "grey"
-                                      : "grey"
+                                        ? GREEN_COLOR
+                                        : GREY_COLOR
+                                      : GREY_COLOR
                                   }
                                 />
                               </IconButton>
@@ -109,9 +125,9 @@ export default class Users extends Component {
                                   color={
                                     user.access
                                       ? user.access.cleaning
-                                        ? "green"
-                                        : "grey"
-                                      : "grey"
+                                        ? GREEN_COLOR
+                                        : GREY_COLOR
+                                      : GREY_COLOR
                                   }
                                 />
                               </IconButton>
@@ -126,9 +142,9 @@ export default class Users extends Component {
                                   color={
                                     user.access
                                       ? user.access.schedule
-                                        ? "green"
-                                        : "grey"
-                                      : "grey"
+                                        ? GREEN_COLOR
+                                        : GREY_COLOR
+                                      : GREY_COLOR
                                   }
                                 />
                               </IconButton>

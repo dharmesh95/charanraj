@@ -84,7 +84,7 @@ class CleaningAdmin extends Component {
             color="primary"
           >
             Delete
-            <TrashIcon className="delete-icon" />
+            <TrashIcon />
           </Button>
           <IntegrationAutosuggest
             suggestions={approvedUsers}

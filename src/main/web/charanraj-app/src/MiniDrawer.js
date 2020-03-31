@@ -235,10 +235,10 @@ export const MiniDrawer = withRouter(props => {
             >
               <ListItemIcon>
                 <div>
-                  {index === 0 && <UtensilsIcon className="icons" />}
-                  {index === 1 && <ShoppingBasketIcon className="icons" />}
-                  {index === 2 && <BroomIcon className="icons" />}
-                  {index === 3 && <CalendarIcon className="icons" />}
+                  {index === 0 && <UtensilsIcon />}
+                  {index === 1 && <ShoppingBasketIcon />}
+                  {index === 2 && <BroomIcon />}
+                  {index === 3 && <CalendarIcon />}
                 </div>
               </ListItemIcon>
               <ListItemText primary={text} />

@@ -1,33 +1,27 @@
 .details-header {
-    color: rgba(0, 0, 0, 0.54)
-}
-
-.vote-icon {
-    fill: grey;
-    margin-right: 5px;
-    height: 20px;
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .permission-denied {
-    padding-left: 24px;
+  padding-left: 24px;
 }
 
 .food-form {
-    margin-bottom: 16px !important;
-    width: 70%;
+  margin-bottom: 16px !important;
+  width: 70%;
 }
 
 .popular-table {
-    padding-left: 5px;
+  padding-left: 5px;
 }
 
 .paper-plane-icon {
-    margin-left: 10px;
-    height: 15px;
-    fill: white;
+  margin-left: 10px;
+  height: 15px;
+  fill: white;
 }
 
 .MuiSelect-selectMenu {
-    padding-left: 16px !important;
-    margin-top: 10px !important;
+  padding-left: 16px !important;
+  margin-top: 10px !important;
 }

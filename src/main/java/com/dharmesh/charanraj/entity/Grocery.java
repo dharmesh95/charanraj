@@ -1,12 +1,11 @@
 package com.dharmesh.charanraj.entity;
 
-import java.util.Date;
-
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import lombok.Data;
+import java.util.Date;
 
 @Data
 @Document(collection = "grocery")
@@ -23,5 +22,8 @@ public class Grocery {
 
 	@Field("item-name")
 	private String itemName;
+
+	@Field("house_id")
+	private String houseId;
 
 }
