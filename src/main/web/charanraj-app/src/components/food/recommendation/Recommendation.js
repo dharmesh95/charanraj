@@ -1,5 +1,4 @@
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import { Button, TextField } from "@material-ui/core";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../../actions/action";
@@ -8,6 +7,7 @@ import { getHeaders } from "../../../constants/user.constants";
 import PaperPlaneIcon from "../../../icons/PaperPlaneIcon";
 import RecommendationModel from "../../../models/RecommendationModel";
 import { DetailsHeaderTypography } from "../food.styles";
+import { RecommendationDiv } from "./recommendation.styles";
 
 class Recommendation extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class Recommendation extends Component {
     const { name } = this.state;
     const { classes } = this.props;
     return (
-      <>
+      <RecommendationDiv>
         <DetailsHeaderTypography variant="caption">
           Please check if already present!
         </DetailsHeaderTypography>
@@ -67,9 +67,9 @@ class Recommendation extends Component {
           onClick={() => this.addReco()}
         >
           Send
-          <PaperPlaneIcon  />
+          <PaperPlaneIcon />
         </Button>
-      </>
+      </RecommendationDiv>
     );
   }
 }

@@ -6,7 +6,6 @@ import MiniDrawer from "./components/mini-drawer/MiniDrawer";
 import { IDLE_TIME } from "./constants/time.constants";
 import { FETCH_USER /* LOGOUT */ } from "./constants/types.constants";
 import { createUrl, GET_USER_URL } from "./constants/url.constants";
-import { getCurrentWeek, getLastWeek } from "./helpers/date.helper";
 import { getProfileObj, removeProfileObj } from "./helpers/session.helper";
 
 class Home extends Component {
@@ -51,8 +50,6 @@ class Home extends Component {
 
   render() {
     const { profileObj } = this.state;
-    const lastWeek = getLastWeek();
-    const currentWeek = getCurrentWeek();
     return (
       <div>
         <IdleTimer
@@ -68,9 +65,6 @@ class Home extends Component {
           isLoading={!profileObj}
           logoutSuccess={this.logoutSuccess}
           profileObj={profileObj}
-          week={currentWeek}
-          currentWeek={currentWeek}
-          lastWeek={lastWeek}
         />
       </div>
     );

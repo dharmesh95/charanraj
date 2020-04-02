@@ -6,6 +6,7 @@ import { continuousCall } from "../../constants/time.constants";
 import { FETCH_VOTE_DATA } from "../../constants/types.constants";
 import { createUrl, DELETE_RECO_URL, GET_VOTE_DATA_URL, POST_VOTE_URL } from "../../constants/url.constants";
 import { ACCESS_FOOD_KEY, getHeaders } from "../../constants/user.constants";
+import { getCurrentWeek } from "../../helpers/date.helper";
 import { isAccessible } from "../../helpers/visibility.helper";
 import VoteModel from "../../models/VoteModel";
 import PermissionDenied from "../common/PermissionDenied";
@@ -18,7 +19,7 @@ class Food extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      week: props.week
+      week: getCurrentWeek()
     };
   }
 
