@@ -1,18 +1,13 @@
-import { Button, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@material-ui/core";
+import { Button, Divider, List, ListItem, Typography } from "@material-ui/core";
 import React from "react";
-import { NEXT_CLASS, OLD_CLASS, UPCOMING_CLASS } from "../../../../constants/styles.constants";
+import { UPCOMING_CLASS } from "../../../../constants/styles.constants";
 import { checkIfEmpty } from "../../../../helpers/common.helper";
 import { compareDates } from "../../../../helpers/date.helper";
 import SaveIcon from "../../../../icons/SaveIcon";
-import "./../../../cleaning/cleaning.css";
-import "./../../../common/common.css";
-import "./list.css";
+import { StyledListItemAvatar, StyledListItemText } from "../../../common/common.styles";
+import { LIST_STYLES } from "./cleaning-list.constants";
+import { HeaderTypography } from "./cleaning-list.styles";
 
-const LIST_STYLES = {
-  0: NEXT_CLASS,
-  1: NEXT_CLASS,
-  "-1": OLD_CLASS
-};
 
 /* accepts date and comapres with current date to return 1, -1 or 0 */
 const compareDateWithToday = date => {
@@ -30,7 +25,7 @@ const setStyles = list => {
     if (val !== -1) {
       for (index++; index < list.length; index++) {
         const obj = list[index];
-        obj.className = UPCOMING_CLASS;
+        obj.component = UPCOMING_CLASS;
       }
       return;
     }
@@ -44,18 +39,17 @@ export default function GeneratedList(props) {
   return (
     !checkIfEmpty(generatedList) && (
       <div>
-        {header && <Typography className="header">{header}</Typography>}
+        {header && <HeaderTypography>{header}</HeaderTypography>}
         <List dense={true}>
           {generatedList.map((obj, index) => {
             return (
               <div key={index}>
                 <Divider variant="fullWidth" component="li" />
                 <ListItem className={obj.className} alignItems="flex-start">
-                  <ListItemAvatar className="list-item-avatar">
+                  <StyledListItemAvatar>
                     <span>{new Date(obj.date).toLocaleDateString()}</span>
-                  </ListItemAvatar>
-                  <ListItemText
-                    className="list-item-text"
+                  </StyledListItemAvatar>
+                  <StyledListItemText
                     primary={
                       <React.Fragment>
                         <Typography>{obj.user1.name}</Typography>
@@ -78,7 +72,7 @@ export default function GeneratedList(props) {
             }}
           >
             Save
-            <SaveIcon className="save-icon" />
+            <SaveIcon  />
           </Button>
         )}
         {props.children}

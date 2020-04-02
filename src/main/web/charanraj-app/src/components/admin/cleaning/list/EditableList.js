@@ -1,19 +1,10 @@
-import {
-  Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Typography
-} from "@material-ui/core";
+import { Divider, List, ListItem, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import { USER_NAME_MAPPING } from "../../../../constants/user.constants";
 import { checkIfEmpty } from "../../../../helpers/common.helper";
 import { findUserByName } from "../../../../helpers/user.helper";
-import "./../../../cleaning/cleaning.css";
-import "./../../../common/common.css";
+import { StyledListItemAvatar, StyledListItemText } from "../../../common/common.styles";
 import EditableUserInput from "./EditableUserInput";
-import "./list.css";
 
 export default class EditableList extends Component {
   constructor(props) {
@@ -52,13 +43,12 @@ export default class EditableList extends Component {
                     className={cleaningObj.className}
                     alignItems="flex-start"
                   >
-                    <ListItemAvatar className="list-item-avatar">
+                    <StyledListItemAvatar>
                       <span>
                         {new Date(cleaningObj.date).toLocaleDateString()}
                       </span>
-                    </ListItemAvatar>
-                    <ListItemText
-                      className="list-item-text"
+                    </StyledListItemAvatar>
+                    <StyledListItemText
                       primary={
                         <React.Fragment>
                           <EditableUserInput

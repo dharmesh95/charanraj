@@ -4,8 +4,8 @@ export const PROD_PATH = "https://jsn-charanraj.herokuapp.com";
 export const createUrl = path => {
   let origin = window.location.origin;
   if (origin.includes("localhost")) {
-    origin = LOCAL_PATH;
-    // origin = PROD_PATH;
+    // origin = LOCAL_PATH;
+    origin = PROD_PATH;
   }
   return origin + "/api/" + path;
 };

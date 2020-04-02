@@ -19,7 +19,6 @@ export default function Vote({ voteData, ...otherProps }) {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <VoteTable
-          className="vote-table"
           isLoading={isLoading}
           rows={voteData}
           {...otherProps}

@@ -1,5 +1,5 @@
 import React from "react";
-import { VoteIconSvg } from "../components/food/food.styles";
+import { VoteIconSvg } from "./icons.styles";
 
 export default function ThumbsUpIcon({fill}) {
   return (

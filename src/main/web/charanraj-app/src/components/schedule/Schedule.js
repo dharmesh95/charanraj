@@ -1,20 +1,14 @@
-import { Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../actions/action";
 import { DOWNLOAD_CLEANING_SCHEDULE } from "../../constants/types.constants";
-import {
-  createUrl,
-  DOWNLOAD_SCHEDULE_URL
-} from "../../constants/url.constants";
-import {
-  ACCESS_SCHEDULE_KEY,
-  getHeaders
-} from "../../constants/user.constants";
+import { createUrl, DOWNLOAD_SCHEDULE_URL } from "../../constants/url.constants";
+import { ACCESS_SCHEDULE_KEY, getHeaders } from "../../constants/user.constants";
 import { isAccessible } from "../../helpers/visibility.helper";
 import DownloadIcon from "../../icons/DownloadIcon";
 import PermissionDenied from "../common/PermissionDenied";
-import "./schedule.css";
+import { DownloadButton, ScheduleTypography } from "./schedule.styles";
 
 class Schedule extends Component {
   downloadSchedule = () => {
@@ -28,18 +22,17 @@ class Schedule extends Component {
     return isAccessible(profileObj, ACCESS_SCHEDULE_KEY) ? (
       <>
         <Typography paragraph>Schedule</Typography>
-        <Typography className="schedule-text">
+        <ScheduleTypography>
           Click the below button to download <b>current month's schedule</b>
-        </Typography>
-        <Button
-          className="download-button"
+        </ScheduleTypography>
+        <DownloadButton
           variant="contained"
           color="primary"
           onClick={() => this.downloadSchedule()}
         >
-          <DownloadIcon className="download-icon"></DownloadIcon>
+          <DownloadIcon />
           Download
-        </Button>
+        </DownloadButton>
       </>
     ) : (
       <PermissionDenied profileObj={profileObj} />

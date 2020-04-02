@@ -1,4 +1,4 @@
-import { Button, Paper, TextField, Typography } from "@material-ui/core";
+import { Button, Paper, Typography } from "@material-ui/core";
 import { Component, default as React } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../actions/action";
@@ -6,8 +6,8 @@ import { ADD_FEEDBACK_URL, createUrl } from "../../constants/url.constants";
 import { getHeaders } from "../../constants/user.constants";
 import PaperPlaneIcon from "../../icons/PaperPlaneIcon";
 import FeedbackModel from "../../models/FeedbackModel";
-import "./../common/common.css";
-import "./feedback.css";
+import { StyledTextFied } from "../common/common.styles";
+import { FeedbackDiv } from "./feedback.styles";
 
 class Feedback extends Component {
   constructor(props) {
@@ -35,14 +35,13 @@ class Feedback extends Component {
       <div>
         <Typography paragraph>Feedback</Typography>
         <Paper>
-          <div className="send-feedback">
-            <TextField
+          <FeedbackDiv>
+            <StyledTextFied
               id="standard-multiline-static"
               label="Give Us Feedback"
               multiline
               rows="6"
               placeholder="Let's make it better together!"
-              className="text-field"
               margin="normal"
               onChange={this.handleChange}
               value={feedback}
@@ -53,9 +52,9 @@ class Feedback extends Component {
               onClick={() => this.sendFeedback()}
             >
               Send
-              <PaperPlaneIcon className="feedback-icon" />
+              <PaperPlaneIcon />
             </Button>
-          </div>
+          </FeedbackDiv>
         </Paper>
       </div>
     );

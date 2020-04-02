@@ -37,14 +37,12 @@ class Cleaning extends Component {
         <SimpleExpansionPanel {...this.props}>
           <UserCleaningList
             isStyled={true}
-            panelClassName="no-padding-expansion-panel"
             panelHeader="Your Schedule"
             generatedList={userCleaningSchedule}
             {...this.props}
           />
           <EditableList
             approvedUsers={approvedUsers}
-            panelClassName="no-padding-expansion-panel"
             panelHeader="Full Schedule"
             generatedList={fullCleaningSchedule}
             isEditable={true}

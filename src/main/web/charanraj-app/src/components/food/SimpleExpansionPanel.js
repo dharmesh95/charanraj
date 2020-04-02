@@ -1,10 +1,10 @@
+import { Typography } from "@material-ui/core";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { StyledExpansionPanelDetails } from "../common/common.styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,9 +50,9 @@ export default function SimpleExpansionPanel(props) {
               {child.props.panelHeader}
             </Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails className={child.props.panelClassName} style={{ display: "block" }}>
+          <StyledExpansionPanelDetails>
             {React.cloneElement(child, { classes, ...props })}
-          </ExpansionPanelDetails>
+          </StyledExpansionPanelDetails>
         </ExpansionPanel>
       ))}
     </div>

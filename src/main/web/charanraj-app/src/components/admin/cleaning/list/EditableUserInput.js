@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import CheckIcon from "../../../../icons/CheckIcon";
 import TimesIcon from "../../../../icons/TimesIcon";
 import IntegrationAutosuggest from "../auto-suggest/IntegrationAutosuggest";
-import "./../../../cleaning/cleaning.css";
 
 export default class EditableUserInput extends Component {
   constructor(props) {
@@ -49,10 +48,10 @@ export default class EditableUserInput extends Component {
                 this.toggleEdit();
               }}
             >
-              <CheckIcon className="check-logo" />
+              <CheckIcon />
             </span>
             <span onClick={() => this.toggleEdit()}>
-              <TimesIcon className="times-logo" />
+              <TimesIcon  />
             </span>
           </div>
         )}

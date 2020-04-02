@@ -1,13 +1,7 @@
 import { Grid, Typography } from "@material-ui/core";
 import React from "react";
-import {
-  LinkedinIcon,
-  GithubIcon,
-  FacebookIcon
-} from "../../icons/ContactIcons";
+import { FacebookIcon, GithubIcon, LinkedinIcon } from "../../icons/ContactIcons";
 import { ContactIconButton } from "../common/IconButtonWrapper";
-import "./../../MiniDrawer.css";
-import "./about-us.styles";
 import { AboutUsPaper, LinkA } from "./about-us.styles";
 import { DeveloperImage } from "./DeveloperImage";
 

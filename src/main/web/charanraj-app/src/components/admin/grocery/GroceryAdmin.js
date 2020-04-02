@@ -1,7 +1,4 @@
-import { Divider, ListItem, ListItemAvatar } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import ListItemText from "@material-ui/core/ListItemText";
-import Typography from "@material-ui/core/Typography";
+import { Divider, List, ListItem, ListItemText, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../../actions/action";
@@ -11,9 +8,8 @@ import { createUrl, GET_GROCERY_URL } from "../../../constants/url.constants";
 import { getHeaders } from "../../../constants/user.constants";
 import { checkIfEmpty } from "../../../helpers/common.helper";
 import { getLastWeekStartDate } from "../../../helpers/date.helper";
-import CircularIndeterminate from "../../common/CircularIndeterminate";
-import "./../../common/common.css";
-import "./../../grocery/grocery.css";
+import { AvatarImg, StyledListItemAvatar, RoleTypography } from "../../common/common.styles";
+import { WithSpinner } from "../../common/WithSpinner";
 
 class GroceryAdmin extends Component {
   fetchGroceryData(props) {
@@ -28,31 +24,30 @@ class GroceryAdmin extends Component {
 
   render() {
     const { grocery, marginStyle } = this.props;
-    return !checkIfEmpty(grocery) ? (
+    return (
       <div style={marginStyle}>
         <List dense={true}>
           {grocery.map((obj, index) => (
             <div key={obj.id}>
               <Divider variant="fullWidth" component="li" />
               <ListItem alignItems="flex-start">
-                <ListItemAvatar className="list-item-avatar">
-                  <img
-                    className="avatar-img"
+                <StyledListItemAvatar>
+                  <AvatarImg
                     src={checkIfEmpty(obj.user) ? null : obj.user.imageUrl}
                     alt="img"
-                  ></img>
-                </ListItemAvatar>
+                  />
+                </StyledListItemAvatar>
                 <ListItemText
                   primary={
                     <React.Fragment>
                       <Typography>
                         {checkIfEmpty(obj.user) ? null : obj.user.name}
                       </Typography>
-                      <Typography className="role">
+                      <RoleTypography>
                         {new Date(obj.date).toLocaleDateString() +
                           " " +
                           new Date(obj.date).toLocaleTimeString()}
-                      </Typography>
+                      </RoleTypography>
                       <Typography>{obj.itemName}</Typography>
                     </React.Fragment>
                   }
@@ -62,8 +57,6 @@ class GroceryAdmin extends Component {
           ))}
         </List>
       </div>
-    ) : (
-      <CircularIndeterminate />
     );
   }
 
@@ -94,4 +87,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroceryAdmin);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithSpinner(GroceryAdmin));

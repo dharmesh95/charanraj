@@ -6,7 +6,7 @@ export const checkRole = (profileObj, roles) => {
 };
 
 export const isMaster = profileObj => {
-  let roles = [MASTER_USER];
+  let roles = [MASTER_USER, SUPER_ADMIN_USER];
   return checkRole(profileObj, roles);
 };
 

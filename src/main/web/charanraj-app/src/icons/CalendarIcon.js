@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { IconSvg } from "../components/common/common.styles";
+import { IconSvg } from "./icons.styles";
 
 export default class CalendarIcon extends Component {
   render() {

@@ -1,6 +1,5 @@
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../../actions/action";
@@ -8,7 +7,7 @@ import { ADD_RECO_URL, createUrl } from "../../../constants/url.constants";
 import { getHeaders } from "../../../constants/user.constants";
 import PaperPlaneIcon from "../../../icons/PaperPlaneIcon";
 import RecommendationModel from "../../../models/RecommendationModel";
-import "./../food.css";
+import { DetailsHeaderTypography } from "../food.styles";
 
 class Recommendation extends Component {
   constructor(props) {
@@ -50,9 +49,9 @@ class Recommendation extends Component {
     const { classes } = this.props;
     return (
       <>
-        <Typography variant="caption" className="details-header">
+        <DetailsHeaderTypography variant="caption">
           Please check if already present!
-        </Typography>
+        </DetailsHeaderTypography>
         <TextField
           id="standard-name"
           label="Food Name"
@@ -68,7 +67,7 @@ class Recommendation extends Component {
           onClick={() => this.addReco()}
         >
           Send
-          <PaperPlaneIcon className="paper-plane-icon" />
+          <PaperPlaneIcon  />
         </Button>
       </>
     );

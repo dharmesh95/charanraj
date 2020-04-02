@@ -1,15 +1,17 @@
-import { Button, Paper, TextField, Typography } from "@material-ui/core";
+import { Button, Paper, Typography } from "@material-ui/core";
 import { Component, default as React } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../actions/action";
 import { ADD_GROCERY_URL, createUrl } from "../../constants/url.constants";
 import { ACCESS_GROCERY_KEY, getHeaders } from "../../constants/user.constants";
+import { checkIfEmpty } from "../../helpers/common.helper";
 import { isAccessible } from "../../helpers/visibility.helper";
 import PaperPlaneIcon from "../../icons/PaperPlaneIcon";
 import GroceryModel from "../../models/GroceryModel";
 import GroceryAdmin from "../admin/grocery/GroceryAdmin";
+import { StyledTextFied } from "../common/common.styles";
 import PermissionDenied from "../common/PermissionDenied";
-import "./grocery.css";
+import { GroceryHeaderTypography, SendGroceryDiv } from "./grocery.styles";
 
 class Grocery extends Component {
   constructor(props) {
@@ -43,14 +45,13 @@ class Grocery extends Component {
       <div>
         <Typography paragraph>Grocery</Typography>
         <Paper>
-          <div className="send-grocery">
-            <TextField
+          <SendGroceryDiv>
+            <StyledTextFied
               id="standard-multiline-static"
               label="Item Name"
               multiline
               rows="6"
               placeholder="Add something to the Grocery List"
-              className="grocery-text-field"
               margin="normal"
               onChange={this.handleChange}
               value={grocery}
@@ -61,15 +62,15 @@ class Grocery extends Component {
               onClick={this.sendGrocery}
             >
               Send
-              <PaperPlaneIcon className="send-icon" />
+              <PaperPlaneIcon />
             </Button>
-          </div>
+          </SendGroceryDiv>
         </Paper>
         <Paper>
-          <div className="grocery-list-header">
-            <Typography paragraph>Grocery List</Typography>
-          </div>
-          <GroceryAdmin {...this.props} />
+          <GroceryHeaderTypography paragraph>
+            Grocery List
+          </GroceryHeaderTypography>
+          <GroceryAdmin isLoading={checkIfEmpty(grocery)} {...this.props} />
         </Paper>
       </div>
     ) : (

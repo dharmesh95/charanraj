@@ -1,17 +1,4 @@
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Menu, MenuItem, Toolbar, Typography, useTheme } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -19,28 +6,25 @@ import clsx from "clsx";
 import React from "react";
 import { GoogleLogout } from "react-google-login";
 import { Redirect, Route, withRouter } from "react-router-dom";
-import Admin from "./components/admin/Admin";
-import Cleaning from "./components/cleaning/Cleaning";
-import PermissionDenied from "./components/common/PermissionDenied";
-import Feedback from "./components/feedback/Feedback";
-import Food from "./components/food/Food";
-import Grocery from "./components/grocery/Grocery";
-import Schedule from "./components/schedule/Schedule";
-import {
-  route,
-  categories,
-  otherCategories
-} from "./constants/route.constants";
-import { isAdminVisibile } from "./helpers/visibility.helper";
-import AddressCardIcon from "./icons/AddressCardIcon";
-import BroomIcon from "./icons/BroomIcon";
-import CommentsIcon from "./icons/CommentsIcon";
-import UserIcon from "./icons/UserIcon";
-import "./MiniDrawer.css";
-import CalendarIcon from "./icons/CalendarIcon";
-import UtensilsIcon from "./icons/UtensilsIcon";
-import ShoppingBasketIcon from "./icons/ShoppingBasketIcon";
-import { AboutUs } from "./components/about-us/AboutUs";
+import { categories, otherCategories, route } from "../../constants/route.constants";
+import { isAdminVisibile } from "../../helpers/visibility.helper";
+import AddressCardIcon from "../../icons/AddressCardIcon";
+import BroomIcon from "../../icons/BroomIcon";
+import CalendarIcon from "../../icons/CalendarIcon";
+import CommentsIcon from "../../icons/CommentsIcon";
+import ShoppingBasketIcon from "../../icons/ShoppingBasketIcon";
+import UserIcon from "../../icons/UserIcon";
+import UtensilsIcon from "../../icons/UtensilsIcon";
+import { AboutUs } from "../about-us/AboutUs";
+import Admin from "../admin/Admin";
+import Cleaning from "../cleaning/Cleaning";
+import PermissionDenied from "../common/PermissionDenied";
+import { WithSpinner } from "../common/WithSpinner";
+import Feedback from "../feedback/Feedback";
+import Food from "../food/Food";
+import Grocery from "../grocery/Grocery";
+import Schedule from "../schedule/Schedule";
+import { ProfileImg } from "./mini-drawer.styles";
 
 const drawerWidth = 240;
 
@@ -112,7 +96,7 @@ function navigate(props, path) {
   props.history.push(path);
 }
 
-export const MiniDrawer = withRouter(props => {
+function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -169,11 +153,7 @@ export const MiniDrawer = withRouter(props => {
               onClick={handleMenu}
               color="inherit"
             >
-              <img
-                src={profileObj.imageUrl}
-                alt="img"
-                className="profile-img"
-              ></img>
+              <ProfileImg src={profileObj.imageUrl} alt="img" />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -255,9 +235,9 @@ export const MiniDrawer = withRouter(props => {
             >
               <ListItemIcon>
                 <div>
-                  {index === 0 && <UserIcon className="icons" />}
-                  {index === 1 && <CommentsIcon className="icons" />}
-                  {index === 2 && <AddressCardIcon className="icons" />}
+                  {index === 0 && <UserIcon />}
+                  {index === 1 && <CommentsIcon />}
+                  {index === 2 && <AddressCardIcon />}
                 </div>
               </ListItemIcon>
               <ListItemText primary={text} />
@@ -304,4 +284,6 @@ export const MiniDrawer = withRouter(props => {
       </main>
     </div>
   );
-});
+}
+
+export default withRouter(WithSpinner(MiniDrawer));

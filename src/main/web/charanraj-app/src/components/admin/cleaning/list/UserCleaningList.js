@@ -1,18 +1,13 @@
-import { Button, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@material-ui/core";
+import { Divider, List, ListItem, Typography } from "@material-ui/core";
 import React from "react";
-import { NEXT_CLASS, OLD_CLASS, UPCOMING_CLASS } from "../../../../constants/styles.constants";
+import { UPCOMING_CLASS } from "../../../../constants/styles.constants";
 import { checkIfEmpty } from "../../../../helpers/common.helper";
 import { compareDates } from "../../../../helpers/date.helper";
 import BellIcon from "../../../../icons/BellIcon";
-import "./../../../cleaning/cleaning.css";
-import "./../../../common/common.css";
-import "./list.css";
+import { StyledListItemAvatar, StyledListItemText } from "../../../common/common.styles";
 
-const LIST_STYLES = {
-  0: NEXT_CLASS,
-  1: NEXT_CLASS,
-  "-1": OLD_CLASS
-};
+import { LIST_STYLES } from "./cleaning-list.constants";
+import { NotifyButton } from "./cleaning-list.styles";
 
 /* accepts date and comapres with current date to return 1, -1 or 0 */
 const compareDateWithToday = date => {
@@ -51,11 +46,10 @@ export default function UserCleaningList(props) {
               <div key={index}>
                 <Divider variant="fullWidth" component="li" />
                 <ListItem className={obj.className} alignItems="flex-start">
-                  <ListItemAvatar className="list-item-avatar">
+                  <StyledListItemAvatar>
                     <span>{new Date(obj.date).toLocaleDateString()}</span>
-                  </ListItemAvatar>
-                  <ListItemText
-                    className="list-item-text"
+                  </StyledListItemAvatar>
+                  <StyledListItemText
                     primary={
                       <React.Fragment>
                         <Typography>{obj.user1.name}</Typography>
@@ -68,17 +62,16 @@ export default function UserCleaningList(props) {
             );
           })}
         </List>
-        <Button
+        <NotifyButton
           variant="contained"
           color="primary"
-          className="notify-button-padding"
           onClick={() => sendEventInvites(profileObj)}
         >
           <span>
             Notify
-            <BellIcon className="bell-icon" />
+            <BellIcon />
           </span>
-        </Button>
+        </NotifyButton>
       </div>
     )
   );

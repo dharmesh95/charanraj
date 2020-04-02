@@ -1,19 +1,17 @@
-import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { ROLES, UNKNOWN_MESSAGE } from "../../constants/user.constants";
-import "../food/food.css";
+import { PermissionDeniedHeaderTypography } from "../food/food.styles";
 
 export default function PermissionDenied(props) {
   const { profileObj } = props;
 
   return (
-    <Typography
+    <PermissionDeniedHeaderTypography
       variant="caption"
-      className="details-header permission-denied"
     >
       {profileObj && ROLES[profileObj.role]
         ? ROLES[profileObj.role].message
         : UNKNOWN_MESSAGE}
-    </Typography>
+    </PermissionDeniedHeaderTypography>
   );
 }

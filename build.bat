@@ -17,5 +17,3 @@ SET src_folder=./src/main/web/charanraj-app/build
 SET tar_folder=./src/main/resources/static
 for /f %%a IN ('dir "%src_folder%" /b') do move %src_folder%\%%a %tar_folder%
 echo moved all files in web app build moved to static folder
-
-pause

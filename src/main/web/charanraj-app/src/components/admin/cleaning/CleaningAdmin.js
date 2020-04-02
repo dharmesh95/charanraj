@@ -1,30 +1,18 @@
-import {
-  Button,
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  Typography
-} from "@material-ui/core";
-import Fab from "@material-ui/core/Fab";
+import { Button, ExpansionPanel, ExpansionPanelSummary, Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getData, postData } from "../../../actions/action";
 import { DEFAULT } from "../../../constants/types.constants";
-import {
-  createUrl,
-  DELETE_CLEANING_SCHEDULE_URL,
-  SAVE_CLEANING_SCHEDULE_URL
-} from "../../../constants/url.constants";
+import { createUrl, DELETE_CLEANING_SCHEDULE_URL, SAVE_CLEANING_SCHEDULE_URL } from "../../../constants/url.constants";
 import { getHeaders } from "../../../constants/user.constants";
-import {
-  getFirstDayofTheMonth,
-  getLastDayofTheMonth
-} from "../../../helpers/date.helper";
+import { getFirstDayofTheMonth, getLastDayofTheMonth } from "../../../helpers/date.helper";
 import { findUserByName } from "../../../helpers/user.helper";
+import { AddIconFab } from "../../../icons/icons.styles";
 import TrashIcon from "../../../icons/TrashIcon";
-import "./../../cleaning/cleaning.css";
 import IntegrationAutosuggest from "./auto-suggest/IntegrationAutosuggest";
+import { CleaningAdminBody } from "./list/cleaning-list.styles";
 import CleaningList from "./list/CleaningList";
 
 class CleaningAdmin extends Component {
@@ -77,7 +65,7 @@ class CleaningAdmin extends Component {
         >
           <Typography className={classes.heading}>Cleaning</Typography>
         </ExpansionPanelSummary>
-        <div className="cleaning-admin-comp">
+        <CleaningAdminBody>
           <Button
             onClick={() => deleteSchedule(profileObj)}
             variant="contained"
@@ -100,14 +88,14 @@ class CleaningAdmin extends Component {
             updateUser={this.updateUser}
             userName="userName2"
           />
-          <Fab
+          <AddIconFab
             className="add-icon"
             size="small"
             color="primary"
             aria-label="add"
           >
             <AddIcon onClick={() => this.addToList()} />
-          </Fab>
+          </AddIconFab>
           <CleaningList
             reset={this.reset}
             list={list}
@@ -118,7 +106,7 @@ class CleaningAdmin extends Component {
             userName2={userName2}
             {...this.props}
           />
-        </div>
+        </CleaningAdminBody>
       </ExpansionPanel>
     );
   }

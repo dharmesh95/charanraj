@@ -1,26 +1,15 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography
-} from "@material-ui/core";
+import { InputLabel, MenuItem, Select, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../actions/action";
 import { continuousCall } from "../../constants/time.constants";
 import { FETCH_VOTE_DATA } from "../../constants/types.constants";
-import {
-  createUrl,
-  DELETE_RECO_URL,
-  GET_VOTE_DATA_URL,
-  POST_VOTE_URL
-} from "../../constants/url.constants";
+import { createUrl, DELETE_RECO_URL, GET_VOTE_DATA_URL, POST_VOTE_URL } from "../../constants/url.constants";
 import { ACCESS_FOOD_KEY, getHeaders } from "../../constants/user.constants";
 import { isAccessible } from "../../helpers/visibility.helper";
 import VoteModel from "../../models/VoteModel";
 import PermissionDenied from "../common/PermissionDenied";
-import "./../common/common.css";
+import { FoodFormControl } from "./food.styles";
 import Recommendation from "./recommendation/Recommendation";
 import SimpleExpansionPanel from "./SimpleExpansionPanel";
 import Vote from "./vote/Vote";
@@ -92,7 +81,7 @@ class Food extends Component {
     return isAccessible(profileObj, ACCESS_FOOD_KEY) ? (
       <div>
         <Typography paragraph>Food</Typography>
-        <FormControl className="food-form">
+        <FoodFormControl>
           <InputLabel htmlFor="date-simple">Select Week</InputLabel>
           <Select
             value={week.startDate.displayValue}
@@ -109,7 +98,7 @@ class Food extends Component {
               Previous Week
             </MenuItem>
           </Select>
-        </FormControl>
+        </FoodFormControl>
         <SimpleExpansionPanel
           vote={this.vote}
           deleteRecommendation={this.deleteRecommendation}
@@ -118,10 +107,7 @@ class Food extends Component {
           {...this.props}
         >
           <Recommendation panelHeader="Recommendation" />
-          <Vote
-            panelHeader="Vote"
-            panelClassName="no-padding-expansion-panel"
-          />
+          <Vote panelHeader="Vote" />
         </SimpleExpansionPanel>
       </div>
     ) : (

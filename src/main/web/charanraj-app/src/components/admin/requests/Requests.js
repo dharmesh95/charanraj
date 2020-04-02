@@ -1,7 +1,6 @@
-import { Divider, ListItem, ListItemAvatar } from "@material-ui/core";
+import { Divider, ListItem } from "@material-ui/core";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
@@ -10,9 +9,10 @@ import React, { Component } from "react";
 import { NORMAL_USER, REJECTED_USER } from "../../../constants/user.constants";
 import { checkIfEmpty } from "../../../helpers/common.helper";
 import CheckIcon from "../../../icons/CheckIcon";
+import { RequestIconButton } from "../../../icons/icons.styles";
 import TimesIcon from "../../../icons/TimesIcon";
-import "./../../common/common.css";
-import "./requests.css";
+import { AvatarImg, StyledListItemAvatar } from "../../common/common.styles";
+import { NoRequestDiv } from "./request.styles";
 
 export default class Requests extends Component {
   render() {
@@ -33,33 +33,27 @@ export default class Requests extends Component {
                 <div key={request.id}>
                   <Divider variant="fullWidth" component="li" />
                   <ListItem alignItems="flex-start">
-                    <ListItemAvatar className="list-item-avatar">
-                      <img
-                        className="avatar-img"
-                        src={request.imageUrl}
-                        alt="img"
-                      ></img>
-                    </ListItemAvatar>
+                    <StyledListItemAvatar>
+                      <AvatarImg src={request.imageUrl} alt="img" />
+                    </StyledListItemAvatar>
                     <ListItemText
                       primary={
                         <React.Fragment>
                           <Typography>{request.name}</Typography>
-                          <IconButton
-                            className="request-icons"
+                          <RequestIconButton
                             onClick={() =>
                               updateUserRequest(request, NORMAL_USER, index)
                             }
                           >
-                            <CheckIcon className="check-logo" />
-                          </IconButton>
-                          <IconButton
-                            className="request-icons"
+                            <CheckIcon />
+                          </RequestIconButton>
+                          <RequestIconButton
                             onClick={() =>
                               updateUserRequest(request, REJECTED_USER, index)
                             }
                           >
                             <TimesIcon className="times-logo" />
-                          </IconButton>
+                          </RequestIconButton>
                         </React.Fragment>
                       }
                     />
@@ -69,7 +63,7 @@ export default class Requests extends Component {
             </List>
           </div>
         ) : (
-          <div className="no-req">No new requests</div>
+          <NoRequestDiv>No new requests</NoRequestDiv>
         )}
       </ExpansionPanel>
     );

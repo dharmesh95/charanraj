@@ -1,7 +1,23 @@
-import styled from "styled-components";
+import { FormControl, Typography } from "@material-ui/core";
+import styled, { css } from "styled-components";
 
-export const VoteIconSvg = styled.svg`
-  fill: grey;
-  margin-right: 5px;
-  height: 20px;
+const DetailsHeader = css`
+  color: rgba(0, 0, 0, 0.54);
+`;
+const PermissioDenied = css`
+  padding-left: 24px;
+`;
+
+export const DetailsHeaderTypography = styled(Typography)`
+  ${DetailsHeader}
+`;
+
+export const PermissionDeniedHeaderTypography = styled(Typography)`
+  ${DetailsHeader}
+  ${PermissioDenied}
+`;
+
+export const FoodFormControl = styled(FormControl)`
+  margin-bottom: 16px !important;
+  width: 70%;
 `;

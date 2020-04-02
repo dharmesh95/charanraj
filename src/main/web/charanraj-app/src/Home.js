@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import IdleTimer from "react-idle-timer";
 import { connect } from "react-redux";
 import { postData /* resetState */ } from "./actions/action";
-import CircularIndeterminate from "./components/common/CircularIndeterminate";
+import MiniDrawer from "./components/mini-drawer/MiniDrawer";
 import { IDLE_TIME } from "./constants/time.constants";
 import { FETCH_USER /* LOGOUT */ } from "./constants/types.constants";
 import { createUrl, GET_USER_URL } from "./constants/url.constants";
 import { getCurrentWeek, getLastWeek } from "./helpers/date.helper";
 import { getProfileObj, removeProfileObj } from "./helpers/session.helper";
-import { MiniDrawer } from "./MiniDrawer";
 
 class Home extends Component {
   constructor(props) {
@@ -65,17 +64,14 @@ class Home extends Component {
           debounce={250}
           timeout={IDLE_TIME}
         />
-        {profileObj ? (
-          <MiniDrawer
-            logoutSuccess={this.logoutSuccess}
-            profileObj={profileObj}
-            week={currentWeek}
-            currentWeek={currentWeek}
-            lastWeek={lastWeek}
-          />
-        ) : (
-          <CircularIndeterminate />
-        )}
+        <MiniDrawer
+          isLoading={!profileObj}
+          logoutSuccess={this.logoutSuccess}
+          profileObj={profileObj}
+          week={currentWeek}
+          currentWeek={currentWeek}
+          lastWeek={lastWeek}
+        />
       </div>
     );
   }

@@ -1,11 +1,11 @@
-import { Button, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@material-ui/core";
+import { Button, Divider, ListItem, Typography } from "@material-ui/core";
 import React from "react";
 import { checkIfEmpty } from "../../../../helpers/common.helper";
 import { addDaysToDate } from "../../../../helpers/date.helper";
 import ToolsIcon from "../../../../icons/ToolsIcon";
+import { StyledListItemAvatar, StyledListItemText } from "../../../common/common.styles";
 import MaterialUIPickers from "../date-picker/MaterialUIPickers";
-import "./../../../cleaning/cleaning.css";
-import "./../../../common/common.css";
+import { ListBody, ListHeaderTypography } from "./cleaning-list.styles";
 import GeneratedList from "./GeneratedList";
 
 let generatedList = [];
@@ -31,17 +31,16 @@ export default function CleaningList(props) {
   return (
     !checkIfEmpty(list) && (
       <div>
-        <Typography className="list-header">List</Typography>
-        <List dense={true} className="list-body">
+        <ListHeaderTypography>List</ListHeaderTypography>
+        <ListBody dense={true}>
           {list.map((obj, index) => (
             <div key={index}>
               <Divider variant="fullWidth" component="li" />
               <ListItem alignItems="flex-start">
-                <ListItemAvatar className="list-item-avatar">
+                <StyledListItemAvatar>
                   <span>Day {index + 1}</span>
-                </ListItemAvatar>
-                <ListItemText
-                  className="list-item-text"
+                </StyledListItemAvatar>
+                <StyledListItemText
                   primary={
                     <React.Fragment>
                       <Typography>{obj.user1.name}</Typography>
@@ -52,7 +51,7 @@ export default function CleaningList(props) {
               </ListItem>
             </div>
           ))}
-        </List>
+        </ListBody>
         <MaterialUIPickers
           updateDate={updateDate}
           label="From Date"
@@ -71,7 +70,7 @@ export default function CleaningList(props) {
           onClick={() => generateList(list, firstDate, lastDate, profileObj)}
         >
           Generate
-          <ToolsIcon className="tools-icon" />
+          <ToolsIcon />
         </Button>
         <GeneratedList
           header="Generated List"
