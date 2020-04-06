@@ -27,3 +27,8 @@ export const RoleTypography = styled(Typography)`
   font-size: 12px !important;
   color: rgba(0, 0, 0, 0.54);
 `;
+
+export const NoDataDiv = styled.div`
+  padding: 8px 24px 24px;
+  color: rgba(0, 0, 0, 0.54);
+`;

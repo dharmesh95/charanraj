@@ -8,8 +8,7 @@ import { createUrl, GET_GROCERY_URL } from "../../../constants/url.constants";
 import { getHeaders } from "../../../constants/user.constants";
 import { checkIfEmpty } from "../../../helpers/common.helper";
 import { getLastWeekStartDate } from "../../../helpers/date.helper";
-import { AvatarImg, StyledListItemAvatar, RoleTypography } from "../../common/common.styles";
-import { WithSpinner } from "../../common/WithSpinner";
+import { AvatarImg, NoDataDiv, RoleTypography, StyledListItemAvatar } from "../../common/common.styles";
 
 class GroceryAdmin extends Component {
   fetchGroceryData(props) {
@@ -22,39 +21,47 @@ class GroceryAdmin extends Component {
     this.groceryInterval = continuousCall(this.fetchGroceryData, this.props);
   }
 
+  componentDidUpdate() {
+    this.fetchGroceryData(this.props);
+  }
+
   render() {
-    const { grocery, marginStyle } = this.props;
+    const { groceryList, marginStyle } = this.props;
     return (
       <div style={marginStyle}>
         <List dense={true}>
-          {grocery.map((obj, index) => (
-            <div key={obj.id}>
-              <Divider variant="fullWidth" component="li" />
-              <ListItem alignItems="flex-start">
-                <StyledListItemAvatar>
-                  <AvatarImg
-                    src={checkIfEmpty(obj.user) ? null : obj.user.imageUrl}
-                    alt="img"
+          {!checkIfEmpty(groceryList) ? (
+            groceryList.map(obj => (
+              <div key={obj.id}>
+                <Divider variant="fullWidth" component="li" />
+                <ListItem alignItems="flex-start">
+                  <StyledListItemAvatar>
+                    <AvatarImg
+                      src={checkIfEmpty(obj.user) ? null : obj.user.imageUrl}
+                      alt="img"
+                    />
+                  </StyledListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <React.Fragment>
+                        <Typography>
+                          {checkIfEmpty(obj.user) ? null : obj.user.name}
+                        </Typography>
+                        <RoleTypography>
+                          {new Date(obj.date).toLocaleDateString() +
+                            " " +
+                            new Date(obj.date).toLocaleTimeString()}
+                        </RoleTypography>
+                        <Typography>{obj.itemName}</Typography>
+                      </React.Fragment>
+                    }
                   />
-                </StyledListItemAvatar>
-                <ListItemText
-                  primary={
-                    <React.Fragment>
-                      <Typography>
-                        {checkIfEmpty(obj.user) ? null : obj.user.name}
-                      </Typography>
-                      <RoleTypography>
-                        {new Date(obj.date).toLocaleDateString() +
-                          " " +
-                          new Date(obj.date).toLocaleTimeString()}
-                      </RoleTypography>
-                      <Typography>{obj.itemName}</Typography>
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-            </div>
-          ))}
+                </ListItem>
+              </div>
+            ))
+          ) : (
+            <NoDataDiv>No Items in Grocery List</NoDataDiv>
+          )}
         </List>
       </div>
     );
@@ -69,7 +76,7 @@ GroceryAdmin.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
   return {
-    grocery: state.adminReducer.grocery
+    groceryList: state.adminReducer.grocery
   };
 }
 
@@ -87,7 +94,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WithSpinner(GroceryAdmin));
+export default connect(mapStateToProps, mapDispatchToProps)(GroceryAdmin);

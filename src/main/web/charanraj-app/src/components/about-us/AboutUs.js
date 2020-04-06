@@ -5,7 +5,7 @@ import { ContactIconButton } from "../common/IconButtonWrapper";
 import { AboutUsPaper, LinkA } from "./about-us.styles";
 import { DeveloperImage } from "./DeveloperImage";
 
-export const AboutUs = () => (
+export const AboutUs = (props) => (
   <div>
     <Typography paragraph>About Us</Typography>
     <AboutUsPaper>
@@ -39,13 +39,13 @@ export const AboutUs = () => (
                   95dharmesh@gmail.com
                 </LinkA>
               </Typography>
-              <ContactIconButton href="https://www.linkedin.com/in/95dharmesh/">
+              <ContactIconButton link="https://www.linkedin.com/in/95dharmesh/">
                 <LinkedinIcon />
               </ContactIconButton>
-              <ContactIconButton href="https://github.com/dharmesh95">
+              <ContactIconButton link="https://github.com/dharmesh95">
                 <GithubIcon />
               </ContactIconButton>
-              <ContactIconButton href="https://www.facebook.com/ddp95">
+              <ContactIconButton link="https://www.facebook.com/ddp95">
                 <FacebookIcon />
               </ContactIconButton>
             </Grid>

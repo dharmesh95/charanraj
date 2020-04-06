@@ -1,25 +1,12 @@
 package com.dharmesh.charanraj.model;
 
 import com.dharmesh.charanraj.entity.User;
+import com.dharmesh.charanraj.entity.VoteEntity;
+import lombok.Data;
 
+@Data
 public class VoteModel {
-	private User user;
-	private Week week;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Week getWeek() {
-		return week;
-	}
-
-	public void setWeek(Week week) {
-		this.week = week;
-	}
-
+    private User user;
+    private Week       week;
+    private VoteEntity vote;
 }

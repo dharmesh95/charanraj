@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { postData } from "../../actions/action";
 import { ADD_GROCERY_URL, createUrl } from "../../constants/url.constants";
 import { ACCESS_GROCERY_KEY, getHeaders } from "../../constants/user.constants";
-import { checkIfEmpty } from "../../helpers/common.helper";
 import { isAccessible } from "../../helpers/visibility.helper";
 import PaperPlaneIcon from "../../icons/PaperPlaneIcon";
 import GroceryModel from "../../models/GroceryModel";
@@ -70,7 +69,7 @@ class Grocery extends Component {
           <GroceryHeaderTypography paragraph>
             Grocery List
           </GroceryHeaderTypography>
-          <GroceryAdmin isLoading={checkIfEmpty(grocery)} {...this.props} />
+          <GroceryAdmin {...this.props} />
         </Paper>
       </div>
     ) : (

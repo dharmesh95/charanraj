@@ -1,17 +1,19 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Home from "./Home";
+import Spinner from "./components/common/Spinner";
 import Login from "./Login";
+
+const Home = lazy(() => import("./Home"));
 
 function App() {
   return (
-    <div>
+    <Suspense fallback={<Spinner />}>
       <Switch>
         <Redirect exact from="/" to="/login" />
         <Route path="/login" component={Login} />
         <Route path="/home" component={Home} />
       </Switch>
-    </div>
+    </Suspense>
   );
 }
 

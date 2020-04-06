@@ -1,17 +1,23 @@
 export const LOCAL_PATH = "http://localhost:8080";
 export const PROD_PATH = "https://jsn-charanraj.herokuapp.com";
 
-export const createUrl = path => {
+export const createUrl = (path, ...pathParams) => {
   let origin = window.location.origin;
-  if (process.env.NODE_ENV==="development") {
+  if (process.env.NODE_ENV === "development") {
     origin = LOCAL_PATH;
     // origin = PROD_PATH;
   }
-  return origin + "/api/" + path;
+  let pathParamsURL = "";
+  if (pathParams) {
+    pathParams.forEach(param => {
+      pathParamsURL += "/" + param;
+    });
+  }
+
+  return origin + "/api/" + path + pathParamsURL;
 };
 
-export const ADD_RECO_URL = "recommendation/addRecommendation";
-export const DELETE_RECO_URL = "recommendation/deleteRecommendation";
+export const RECOMMENDATION_URL = "recommendation";
 
 export const GET_VOTE_DATA_URL = "food/getVoteData";
 

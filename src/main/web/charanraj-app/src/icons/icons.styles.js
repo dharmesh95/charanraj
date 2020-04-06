@@ -1,13 +1,6 @@
 import { Fab, IconButton } from "@material-ui/core";
 import styled, { css } from "styled-components";
 
-export const DeleteIconSvg = styled.svg`
-  fill: white;
-  margin-right: 5px;
-  padding-left: 10px;
-  height: 15px;
-`;
-
 export const Icons = css`
   fill: currentColor;
   width: 1em;
@@ -24,7 +17,7 @@ export const IconSvg = styled.svg`
 `;
 
 export const VoteIconSvg = styled.svg`
-  fill: grey;
+  fill: ${props => props.fill || "grey"};
   margin-right: 5px;
   height: 20px;
 `;

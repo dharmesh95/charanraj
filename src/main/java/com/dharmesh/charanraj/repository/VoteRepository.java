@@ -1,18 +1,17 @@
 package com.dharmesh.charanraj.repository;
 
+import com.dharmesh.charanraj.entity.VoteEntity;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import com.dharmesh.charanraj.entity.Vote;
-
-public interface VoteRepository extends MongoRepository<Vote, String> {
+public interface VoteRepository extends MongoRepository<VoteEntity, String> {
 
 	void deleteByEmail(String email);
 
-	List<Vote> findByDateBetween(Date weekStartDate, Date weekEndDate);
+	List<VoteEntity> findByDateBetween(Date weekStartDate, Date weekEndDate);
 
-	List<Vote> findByEmailAndDateBetween(String email, Date weekStartDate, Date weekEndDate);
+	List<VoteEntity> findByEmailAndDateBetween(String email, Date weekStartDate, Date weekEndDate);
 
 }

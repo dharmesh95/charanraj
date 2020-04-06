@@ -2,11 +2,11 @@ import { Button, TextField } from "@material-ui/core";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postData } from "../../../actions/action";
-import { ADD_RECO_URL, createUrl } from "../../../constants/url.constants";
+import { createUrl, RECOMMENDATION_URL } from "../../../constants/url.constants";
 import { getHeaders } from "../../../constants/user.constants";
 import PaperPlaneIcon from "../../../icons/PaperPlaneIcon";
 import RecommendationModel from "../../../models/RecommendationModel";
-import { DetailsHeaderTypography } from "../food.styles";
+import { HeaderDiv } from "../food.styles";
 import { RecommendationDiv } from "./recommendation.styles";
 
 class Recommendation extends Component {
@@ -22,7 +22,7 @@ class Recommendation extends Component {
       addRecommendation,
       fetchAllFoodData,
       updateWeek,
-      currentWeek
+      currentWeek,
     } = this.props;
     if (name && name.length > 2) {
       let recommendation = new RecommendationModel(
@@ -40,7 +40,7 @@ class Recommendation extends Component {
     }
   };
 
-  handleChange = $event => {
+  handleChange = ($event) => {
     this.setState({ name: $event.target.value });
   };
 
@@ -49,17 +49,15 @@ class Recommendation extends Component {
     const { classes } = this.props;
     return (
       <RecommendationDiv>
-        <DetailsHeaderTypography variant="caption">
-          Please check if already present!
-        </DetailsHeaderTypography>
+        <HeaderDiv variant="body1">Please check if already present!</HeaderDiv>
         <TextField
-          id="standard-name"
           label="Food Name"
           placeholder="Min. 3 characters"
           className={classes.textField}
           value={name}
           onChange={this.handleChange}
           margin="normal"
+          fullWidth
         />
         <Button
           variant="contained"
@@ -85,11 +83,11 @@ function mapDispatchToProps(dispatch) {
     addRecommendation: (recommendation, profileObj) =>
       dispatch(
         postData(
-          createUrl(ADD_RECO_URL),
+          createUrl(RECOMMENDATION_URL),
           recommendation,
           getHeaders(profileObj)
         )
-      )
+      ),
   };
 }
 

@@ -1,12 +1,12 @@
 import React from "react";
-import CircularIndeterminate from "./CircularIndeterminate";
+import Spinner from "./Spinner";
 
 export const WithSpinner = WrappedComponent => ({
   isLoading,
   ...otherProps
 }) => {
   return isLoading ? (
-    <CircularIndeterminate />
+    <Spinner />
   ) : (
     <WrappedComponent {...otherProps} />
   );

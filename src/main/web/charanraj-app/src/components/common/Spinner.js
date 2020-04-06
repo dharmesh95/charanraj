@@ -6,10 +6,10 @@ const useStyles = makeStyles(theme => ({
   progress: {
     margin: theme.spacing(2)
   },
-  alignment: { textAlign: "center" }
+  alignment: { textAlign: "center"}
 }));
 
-export default function CircularIndeterminate() {
+export default function Spinner() {
   const classes = useStyles();
   return (
     <div className={classes.alignment}>

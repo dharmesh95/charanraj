@@ -11,8 +11,7 @@ import { checkIfEmpty } from "../../../helpers/common.helper";
 import CheckIcon from "../../../icons/CheckIcon";
 import { RequestIconButton } from "../../../icons/icons.styles";
 import TimesIcon from "../../../icons/TimesIcon";
-import { AvatarImg, StyledListItemAvatar } from "../../common/common.styles";
-import { NoRequestDiv } from "./request.styles";
+import { AvatarImg, NoDataDiv, StyledListItemAvatar } from "../../common/common.styles";
 
 export default class Requests extends Component {
   render() {
@@ -63,7 +62,7 @@ export default class Requests extends Component {
             </List>
           </div>
         ) : (
-          <NoRequestDiv>No new requests</NoRequestDiv>
+          <NoDataDiv>No new requests</NoDataDiv>
         )}
       </ExpansionPanel>
     );

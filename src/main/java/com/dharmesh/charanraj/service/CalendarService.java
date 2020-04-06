@@ -99,7 +99,6 @@ public class CalendarService {
 			event.setColorId(GoogleAPIConstants.FLAMINGO_COLOR_ID);
 
 			event = cService.events().insert(GoogleAPIConstants.CALENDAR_ID, event).execute();
-			/* System.out.printf("Event created: %s\n", event.getHtmlLink()); */
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (GeneralSecurityException e) {

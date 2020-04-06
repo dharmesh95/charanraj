@@ -1,16 +1,15 @@
 package com.dharmesh.charanraj.controller;
 
-import java.util.HashMap;
-
+import com.dharmesh.charanraj.model.VoteModel;
+import com.dharmesh.charanraj.model.Week;
+import com.dharmesh.charanraj.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dharmesh.charanraj.entity.Vote;
-import com.dharmesh.charanraj.model.Week;
-import com.dharmesh.charanraj.service.VoteService;
+import java.util.HashMap;
 
 @CrossOrigin
 @RestController
@@ -26,7 +25,7 @@ public class VoteController {
 	}
 
 	@RequestMapping("/addVote")
-	public void addVote(@RequestBody Vote voteObj) {
-		voteService.addVote(voteObj);
+	public void addVote(@RequestBody VoteModel voteModel) {
+		voteService.addVote(voteModel);
 	}
 }

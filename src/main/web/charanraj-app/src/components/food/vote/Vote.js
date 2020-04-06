@@ -1,5 +1,6 @@
 import { makeStyles, Paper } from "@material-ui/core";
 import React from "react";
+import { NoDataDiv } from "../../common/common.styles";
 import VoteTable from "./VoteTable";
 
 const useStyles = makeStyles(theme => ({
@@ -14,15 +15,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function Vote({ voteData, ...otherProps }) {
   const classes = useStyles();
-  const isLoading = !(voteData && voteData.length);
+  const showTable = voteData && voteData.length;
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <VoteTable
-          isLoading={isLoading}
-          rows={voteData}
-          {...otherProps}
-        />
+        {showTable ? (
+          <VoteTable rows={voteData} {...otherProps} />
+        ) : (
+          <NoDataDiv />
+        )}
       </Paper>
     </div>
   );

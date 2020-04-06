@@ -37,6 +37,8 @@ export const postData = (
     });
 };
 
-// export const resetState = type => dispatch => {
-//   dispatch({ type, data: {} });
-// };
+export const deleteData = (url, headers) => {
+  axios.delete(url, { headers }).catch(error => {
+    console.log(url, error);
+  });
+};

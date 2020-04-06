@@ -3,13 +3,20 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, createStore } from "redux";
+import { logger } from "redux-logger";
 import thunk from "redux-thunk";
 import App from "./App";
 import "./index.css";
 import { rootReducer } from "./reducers/app.reducer";
 import * as serviceWorker from "./serviceWorker";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+let middlewares = [thunk];
+
+if (process.env.NODE_ENV === "development") {
+  middlewares.push(logger);
+}
+
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 ReactDOM.render(
   <Provider store={store}>

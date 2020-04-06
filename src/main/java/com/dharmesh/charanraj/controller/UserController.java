@@ -1,15 +1,14 @@
 package com.dharmesh.charanraj.controller;
 
-import java.util.List;
-
+import com.dharmesh.charanraj.entity.User;
+import com.dharmesh.charanraj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dharmesh.charanraj.entity.User;
-import com.dharmesh.charanraj.service.UserService;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -21,7 +20,7 @@ public class UserController {
 
 	@RequestMapping("/getUser")
 	public User getUserByEmail(@RequestBody User userObj) {
-		return userService.getUserByEmail(userObj);
+		return userService.getUserByEmailAndUpdate(userObj);
 	}
 
 	@RequestMapping("/getApprovedUsers")

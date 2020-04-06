@@ -28,6 +28,11 @@ public class User {
 	@Field("access")
 	private Access access;
 
+	@Field("houses")
+	private String[] houses;
+
+	private String houseId;
+
 	public User() {
 		super();
 		this.access = new Access(false);

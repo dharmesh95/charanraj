@@ -1,11 +1,7 @@
 import { Icon, TableCell, TableRow } from "@material-ui/core";
 import React from "react";
-import { GREY_COLOR, GREEN_COLOR, RED_COLOR } from "../../../constants/color.constants";
-import {
-  DOWNVOTE,
-  UPVOTE,
-  VOTE_POINTS_KEY
-} from "../../../constants/vote.constants";
+import { GREEN_COLOR, GREY_COLOR, RED_COLOR } from "../../../constants/color.constants";
+import { DOWNVOTE, UPVOTE, VOTE_POINTS_KEY } from "../../../constants/vote.constants";
 import { isAdmin } from "../../../helpers/visibility.helper";
 import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
 import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";

@@ -8,7 +8,7 @@ const PermissioDenied = css`
   padding-left: 24px;
 `;
 
-export const DetailsHeaderTypography = styled(Typography)`
+export const HeaderDiv = styled.div`
   ${DetailsHeader}
 `;
 

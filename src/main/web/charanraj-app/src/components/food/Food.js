@@ -1,10 +1,10 @@
 import { InputLabel, MenuItem, Select, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { postData } from "../../actions/action";
+import { deleteData, postData } from "../../actions/action";
 import { continuousCall } from "../../constants/time.constants";
 import { FETCH_VOTE_DATA } from "../../constants/types.constants";
-import { createUrl, DELETE_RECO_URL, GET_VOTE_DATA_URL, POST_VOTE_URL } from "../../constants/url.constants";
+import { createUrl, GET_VOTE_DATA_URL, POST_VOTE_URL, RECOMMENDATION_URL } from "../../constants/url.constants";
 import { ACCESS_FOOD_KEY, getHeaders } from "../../constants/user.constants";
 import { getCurrentWeek } from "../../helpers/date.helper";
 import { isAccessible } from "../../helpers/visibility.helper";
@@ -33,7 +33,7 @@ class Food extends Component {
       new Date(),
       profileObj.houseId
     );
-    addVote(profileObj, week.startDate.value, week.endDate.value, vote);
+    addVote(profileObj, vote);
     fetchVoteData(profileObj, week.startDate.value, week.endDate.value);
   };
 
@@ -132,24 +132,22 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     deleteRecommendationById: (id, profileObj) =>
-      dispatch(
-        postData(createUrl(DELETE_RECO_URL), { id }, getHeaders(profileObj))
-      ),
-    fetchVoteData: (profileObj, weekStartDate, weekEndDate) =>
+      deleteData(createUrl(RECOMMENDATION_URL, id), getHeaders(profileObj)),
+    fetchVoteData: (user, weekStartDate, weekEndDate) =>
       dispatch(
         postData(
           createUrl(GET_VOTE_DATA_URL),
-          { user: profileObj, week: { weekStartDate, weekEndDate } },
-          getHeaders(profileObj),
+          { user, week: { weekStartDate, weekEndDate } },
+          getHeaders(user),
           FETCH_VOTE_DATA
         )
       ),
-    addVote: (profileObj, weekStartDate, weekEndDate, vote) =>
+    addVote: (user, vote) =>
       dispatch(
         postData(
           createUrl(POST_VOTE_URL),
-          { user: profileObj, week: { weekStartDate, weekEndDate }, vote },
-          getHeaders(profileObj),
+          { user, vote },
+          getHeaders(user),
           FETCH_VOTE_DATA
         )
       )
