@@ -13,11 +13,14 @@ export const createUrl = (path, ...pathParams) => {
       pathParamsURL += "/" + param;
     });
   }
-
+  
   return origin + "/api/" + path + pathParamsURL;
 };
 
 export const RECOMMENDATION_URL = "recommendation";
+
+export const GROCERY_URL = "grocery";
+export const GET_GROCERY_URL = "grocery/get";
 
 export const GET_VOTE_DATA_URL = "food/getVoteData";
 
@@ -33,9 +36,6 @@ export const SAVE_CLEANING_SCHEDULE_URL = "cleaning/saveCleaningSchedule";
 export const DELETE_CLEANING_SCHEDULE_URL = "cleaning/deleteSchedule";
 
 export const SEND_EVENT_INVITES_URL = "calendar/sendEventInvites";
-
-export const ADD_GROCERY_URL = "grocery/addItem";
-export const GET_GROCERY_URL = "grocery/getItems";
 
 export const ADD_FEEDBACK_URL = "feedback/addFeedback";
 export const GET_FEEDBACK_URL = "feedback/getFeedback";

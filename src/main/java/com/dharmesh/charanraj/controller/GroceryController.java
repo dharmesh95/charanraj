@@ -1,12 +1,10 @@
 package com.dharmesh.charanraj.controller;
 
-import com.dharmesh.charanraj.entity.Grocery;
+import com.dharmesh.charanraj.dto.GroceryDTO;
+import com.dharmesh.charanraj.entity.GroceryItem;
 import com.dharmesh.charanraj.service.GroceryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,17 +13,19 @@ import java.util.List;
 @RequestMapping("/api/grocery")
 public class GroceryController {
 
-	@Autowired
-	private GroceryService groceryService;
+    @Autowired
+    private GroceryService groceryService;
 
-	@RequestMapping("/addItem")
-	public void addItem(@RequestBody Grocery groceryObj) {
-		groceryService.addItem(groceryObj);
-	}
+    @PostMapping
+    public List<GroceryItem> addItem(@RequestBody GroceryDTO groceryDTO) {
+        groceryService.addItem(groceryDTO.getGroceryItem());
+        return getItems(groceryDTO);
+    }
 
-	@RequestMapping("/getItems")
-	public List<Grocery> getItems(@RequestBody Grocery groceryObj) {
-		return groceryService.getItems(groceryObj.getDate());
-	}
+    @PostMapping("/get")
+    public List<GroceryItem> getItems(@RequestBody GroceryDTO groceryDTO) {
+        return groceryService.getItems(groceryDTO.getLastWeekStartDate(),
+                groceryDTO.getGroceryItem().getUser().getHouseId());
+    }
 
 }

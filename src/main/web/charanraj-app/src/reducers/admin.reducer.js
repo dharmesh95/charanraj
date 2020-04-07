@@ -1,9 +1,4 @@
-import {
-  FETCH_ALL_REQUESTS,
-  FETCH_APPROVED_USERS,
-  FETCH_FEEDBACK,
-  FETCH_GROCERY
-} from "../constants/types.constants";
+import { FETCH_ALL_REQUESTS, FETCH_APPROVED_USERS, FETCH_FEEDBACK, FETCH_GROCERY } from "../constants/types.constants";
 import { initialState } from "./app.reducer";
 
 const adminReducer = (state = initialState, action) => {

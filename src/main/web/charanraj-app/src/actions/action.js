@@ -4,12 +4,13 @@ import { transformDefault } from "../utils/transformerUtils";
 
 export const getData = (
   url,
+  params,
   headers,
   type,
   transformer = transformDefault
 ) => dispatch => {
   axios
-    .get(url, { headers })
+    .get(url, { params, headers })
     .then(payload => {
       dispatch({ type, data: transformer(payload.data) });
     })
