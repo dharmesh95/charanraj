@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Document(collection = "grocery")
-public class Grocery {
+public class GroceryItem {
 
 	@Id
 	private String id;
@@ -22,8 +22,5 @@ public class Grocery {
 
 	@Field("item-name")
 	private String itemName;
-
-	@Field("house_id")
-	private String houseId;
 
 }

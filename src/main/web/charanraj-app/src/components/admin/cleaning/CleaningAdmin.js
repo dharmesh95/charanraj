@@ -132,6 +132,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(
         getData(
           createUrl(DELETE_CLEANING_SCHEDULE_URL),
+          null,
           getHeaders(profileObj),
           DEFAULT
         )
