@@ -8,7 +8,8 @@ import voteReducer from "./vote.reducer";
 
 export const initialState = {
   recommendationData: {},
-  voteDataByEmail: {}
+  voteDataByEmail: {},
+  grocery: [],
 };
 
 export const appReducer = combineReducers({
@@ -16,7 +17,7 @@ export const appReducer = combineReducers({
   voteReducer,
   recommendationReducer,
   userReducer,
-  adminReducer
+  adminReducer,
 });
 
 export const rootReducer = (state, action) => {

@@ -83,7 +83,6 @@ function mapDispatchToProps(dispatch) {
   return {
     getUser: profileObj =>
       dispatch(postData(createUrl(GET_USER_URL), profileObj, {}, FETCH_USER))
-    // resetState: () => dispatch(resetState(LOGOUT))
   };
 }
 

@@ -22,4 +22,7 @@ public class GroceryService {
 		return groceryRepository.findByDateGreaterThanOrderByDateDesc(lastWeekStartDate);
 	}
 
+	public void deleteAllGroceryItems() {
+		groceryRepository.deleteAll();
+	}
 }

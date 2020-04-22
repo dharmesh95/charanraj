@@ -1,5 +1,6 @@
 package com.dharmesh.charanraj.constants;
 
+import com.dharmesh.charanraj.entity.GroceryItem;
 import com.dharmesh.charanraj.entity.Recommendation;
 
 import java.util.ArrayList;
@@ -26,4 +27,7 @@ public class DataInitializationConstants {
         return recommendationList;
     }
 
+    public static List<GroceryItem> getGroceryItems() {
+        return null;
+    }
 }

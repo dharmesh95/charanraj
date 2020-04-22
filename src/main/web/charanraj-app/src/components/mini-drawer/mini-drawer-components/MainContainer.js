@@ -1,15 +1,16 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { getCurrentWeek, getLastWeek } from "../../../helpers/date.helper";
 import { isAdminVisibile } from "../../../helpers/visibility.helper";
-import { AboutUs } from "../../about-us/AboutUs";
-import Admin from "../../admin/Admin";
-import Cleaning from "../../cleaning/Cleaning";
 import PermissionDenied from "../../common/PermissionDenied";
-import Feedback from "../../feedback/Feedback";
 import Food from "../../food/Food";
-import Grocery from "../../grocery/Grocery";
-import Schedule from "../../schedule/Schedule";
+
+const Grocery = lazy(() => import("./../../grocery/Grocery"));
+const Cleaning = lazy(() => import("../../cleaning/Cleaning"));
+const Schedule = lazy(() => import("../../schedule/Schedule"));
+const Admin = lazy(() => import("../../admin/Admin"));
+const Feedback = lazy(() => import("../../feedback/Feedback"));
+const AboutUs = lazy(() => import("../../about-us/AboutUs"));
 
 function MainContainer(props) {
   const { classes, profileObj } = props;

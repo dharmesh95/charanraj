@@ -5,7 +5,7 @@ import { ContactIconButton } from "../common/IconButtonWrapper";
 import { AboutUsPaper, LinkA } from "./about-us.styles";
 import { DeveloperImage } from "./DeveloperImage";
 
-export const AboutUs = (props) => (
+const AboutUs = (props) => (
   <div>
     <Typography paragraph>About Us</Typography>
     <AboutUsPaper>
@@ -55,3 +55,4 @@ export const AboutUs = (props) => (
     </AboutUsPaper>
   </div>
 );
+export default AboutUs;
