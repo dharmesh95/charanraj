@@ -7,9 +7,9 @@ export const SendGroceryDiv = styled.div`
 `;
 
 export const GroceryHeaderTypography = styled(Typography)`
-  margin-top: 15px;
-  padding-top: 15px;
-  margin-bottom: 15px;
-  font-size: 15px;
-  padding-left: 15px;
+  margin-top: 15px !important;
+  padding-top: 15px !important;
+  margin-bottom: 15px !important;
+  font-size: 15px !important;
+  padding-left: 15px !important;
 `;

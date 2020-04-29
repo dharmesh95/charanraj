@@ -33,17 +33,11 @@ class Schedule extends Component {
           <DownloadIcon />
           Download
         </DownloadButton>
-      </>
+      </> //
     ) : (
       <PermissionDenied profileObj={profileObj} />
     );
   }
-}
-
-Schedule.propTypes = {};
-
-function mapStateToProps(state, ownProps) {
-  return {};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -60,4 +54,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
+export default connect(null, mapDispatchToProps)(Schedule);

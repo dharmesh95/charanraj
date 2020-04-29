@@ -114,10 +114,6 @@ class CleaningAdmin extends Component {
 
 CleaningAdmin.propTypes = {};
 
-function mapStateToProps(state, ownProps) {
-  return {};
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     saveCleaningSchedule: (schedule, profileObj) =>
@@ -140,4 +136,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CleaningAdmin);
+export default connect(null, mapDispatchToProps)(CleaningAdmin);

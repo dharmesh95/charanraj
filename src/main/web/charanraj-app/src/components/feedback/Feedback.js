@@ -61,12 +61,6 @@ class Feedback extends Component {
   }
 }
 
-Feedback.propTypes = {};
-
-function mapStateToProps(state, ownProps) {
-  return {};
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     saveFeedback: (feedbackObj, profileObj) =>
@@ -80,4 +74,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
+export default connect(null, mapDispatchToProps)(Feedback);

@@ -72,12 +72,6 @@ class Recommendation extends Component {
   }
 }
 
-Recommendation.propTypes = {};
-
-function mapStateToProps(state, ownProps) {
-  return {};
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     addRecommendation: (recommendation, profileObj) =>
@@ -91,4 +85,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);
+export default connect(null, mapDispatchToProps)(Recommendation);
