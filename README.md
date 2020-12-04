@@ -1,7 +1,7 @@
 # Home Sweet Home
 Web Application to ease life of all members in a house.
 
-<a  href="http://jsn-charanraj.herokuapp.com/">WATCH LIVE</a>
+<a  href="https://jsn-charanraj.herokuapp.com/">WATCH LIVE</a>
 
 Key features:
 
